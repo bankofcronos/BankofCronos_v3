@@ -258,108 +258,6 @@ export default function App() {
   } = state;
   const dispatch = useDispatch();
 
-  // const [address, setaddress] = useState("Not Connected");
-  // const [usdcbalance, setusdcbalance] = useState(0.0);
-  // const [cusdbalance, setcusdbalance] = useState(0.0);
-  // const [wcrobalance, setwcrobalance] = useState(0.0);
-  // const [crobalance, setcrobalance] = useState(0.0);
-  // const [wethbalance, setwethbalance] = useState(0.0);
-  // const [wbtcbalance, setwbtcbalance] = useState(0.0);
-  // const [bocbalance, setbocbalance] = useState(0.0);
-  // const [sbocbalance, setsbocbalance] = useState(0.0);
-  // const [treasurybalance, settreasurybalance] = useState(0);
-  // const [lpbalance, setlpbalance] = useState(0.0);
-
-  // const [cropricefeed, setcropricefeed] = useState(0.0);
-  // const [ethpricefeed, setethpricefeed] = useState(0.0);
-  // const [btcpricefeed, setbtcpricefeed] = useState(0.0);
-  // const [trovecrocol, settrovecrocol] = useState(0.0);
-  // const [troveethcol, settroveethcol] = useState(0.0);
-  // const [trovebtccol, settrovebtccol] = useState(0.0);
-  // const [trovedebt, settrovedebt] = useState(0.0);
-  // const [newtrovecrocol, setnewtrovecrocol] = useState(0.0);
-  // const [newtroveethcol, setnewtroveethcol] = useState(0.0);
-  // const [newtrovebtccol, setnewtrovebtccol] = useState(0.0);
-  // const [newtrovedebt, setnewtrovedebt] = useState(0.0);
-  // const [istroveactive, setistroveactive] = useState(0);
-  // const [protocolborrowfee, setprotocolborrowfee] = useState(0.0);
-  // const [protocoltvl, setprotocoltvl] = useState(0.0);
-  // const [protocoltrovecount, setprotocoltrovecount] = useState(0.0);
-  // const [protocolcusdsupply, setprotocolcusdsupply] = useState(0.0);
-  // const [protocoltcr, setprotocoltcr] = useState(0.0);
-  // const [protocolisrecovery, setprotocolisrecovery] = useState(false);
-  // const [protocolrecoverythreshold, setprotocolrecoverythreshold] =
-  //   useState(0.0);
-  // const [protocolSystemVC, setprotocolSystemVC] = useState(0.0);
-  // const [protocolCROVC, setprotocolCROVC] = useState(0.0);
-  // const [protocolBTCVC, setprotocolBTCVC] = useState(0.0);
-  // const [protocolETHVC, setprotocolETHVC] = useState(0.0);
-  // const [spdeposits, setspdeposits] = useState(0.0);
-  // const [newspdeposits, setnewspdeposits] = useState(0.0);
-  // const [trovecrocolapproved, settrovecrocolapproved] = useState(0.0);
-  // const [troveethcolapproved, settroveethcolapproved] = useState(0.0);
-  // const [trovebtccolapproved, settrovebtccolapproved] = useState(0.0);
-
-  // const [connecterror, setconnecterror] = useState("");
-  // const [connectstep, setconnectstep] = useState(0);
-  // const [status, setstatus] = useState("");
-  // const [mintsuccess, setmintsuccess] = useState("");
-  // const [optionsState, setoptionsState] = useState(1);
-  // const [connection, setconnection] = useState(0);
-
-  // const [stakeamount, setstakeamount] = useState(0.0);
-  // const [unstakeamount, setunstakeamount] = useState(0.0);
-  // const [index, setindex] = useState(0.0);
-  // const [reward, setreward] = useState(0.0);
-  // const [circsupply, setcircsupply] = useState(0.0);
-  // const [rebasetime, setrebasetime] = useState(0);
-  // const [bondamount, setbondamount] = useState(0.0);
-
-  // const [bocprice, setbocprice] = useState(0.0);
-  // const [cusdprice, setcusdprice] = useState(0.0);
-  // const [bocbondprice, setbondbocprice] = useState(0.0);
-  // const [bocmaxbond, setbocmaxbond] = useState(0.0);
-  // const [bondtime, setbondtime] = useState(0);
-  // const [bondpurchased, setbondpurchased] = useState(0.0);
-  // const [bondvested, setbondvested] = useState(0.0);
-  // const [bondstatus, setbondstatus] = useState("");
-
-  // const [totalsupply, settotalsupply] = useState(0.0);
-
-  // const [lptreasurybalance, setlptreasurybalance] = useState(0);
-  // const [lpbondamount, setlpbondamount] = useState(0.0);
-  // const [lpbocprice, setlpbocprice] = useState(0.0);
-  // const [lpbocbondprice, setlpbondbocprice] = useState(0.0);
-  // const [lpbocmaxbond, setlpbocmaxbond] = useState(0.0);
-  // const [lpbondtime, setlpbondtime] = useState(0);
-  // const [lpbondpurchased, setlpbondpurchased] = useState(0.0);
-
-  // const [lpbondvested, setlpbondvested] = useState(0.0);
-  // const [lpbondstatus, setlpbondstatus] = useState("");
-
-  // const [openSideBar, setOpenSideBar] = useState(false);
-  // const [showBond, setShowBond] = useState(true);
-  // const [bondModal, setBondModal] = useState(false);
-  // const [bondModal2, setBondModal2] = useState(false);
-  // const [modalShow, setModalShow] = useState(false);
-  // const [windowWidth, setWindowWidth] = useState(400);
-  // const [open, setOpen] = useState(false);
-  // const [isStake, setIsStake] = useState(false);
-  // const [loader, setLoader] = useState(false);
-  // const [toggle, setToggle] = useState(false);
-  // const [showTotal, setShowTotal] = useState(false);
-  // const [modalShowBond, setModalShowBond] = useState(false);
-  // const [isConnected, setIsConnected] = useState(false);
-  // const [openLoanCard, setOpenLoanCard] = useState(false);
-  // const [openPoll, setOpenPoll] = useState(false);
-  // const [openStaking, setOpenStaking] = useState(false);
-  // const [showStatboard, setShowStatboard] = useState(false);
-  // const [isConnecting, setIsConnecting] = useState(false);
-  // const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  // const [isScrolling, setIsScrolling] = useState(false);
-  // const [showAgreementModal, setShowAgreementModal] = useState(true);
-  // const [isAgreeToTermsPolicy, setIsAgreeToTermPolicy] = useState(false);
-
   //handle resize
   useEffect(() => {
     function handleResize() {
@@ -457,7 +355,7 @@ export default function App() {
           })
         );
       }
-      // setusdcbalance(usdcbalance);
+
       dispatch(setState({ name: "usdcbalance", value: usdcbalance }));
       dispatch(setState({ name: "cusdbalance", value: cusdbalance }));
       dispatch(setState({ name: "wcrobalance", value: wcrobalance }));
@@ -472,19 +370,6 @@ export default function App() {
       dispatch(setState({ name: "ethpricefeed", value: ethpricefeed }));
       dispatch(setState({ name: "btcpricefeed", value: btcpricefeed }));
       dispatch(setState({ name: "trovecrocol", value: trovecrocol }));
-      // setcusdbalance(cusdbalance);
-      // setwcrobalance(wcrobalance);
-      // setcrobalance(crobalance);
-      // setwethbalance(wethbalance);
-      // setwbtcbalance(wbtcbalance);
-      // setbocbalance(bocbalance);
-      // setsbocbalance(sbocbalance);
-      // settreasurybalance(treasurybalance);
-      // setlpbalance(lpbalance);
-      // setcropricefeed(cropricefeed);
-      // setethpricefeed(ethpricefeed);
-      // setbtcpricefeed(btcpricefeed);
-      // settrovecrocol(trovecrocol);
       dispatch(setState({ name: "rebasetime", value: rebasetime }));
       dispatch(setState({ name: "connecterror", value: connecterror }));
       dispatch(setState({ name: "status", value: status }));
@@ -655,10 +540,7 @@ export default function App() {
     const weth = new ethers.Contract(WETHAddress, WETH.abi, signer);
     const wbtc = new ethers.Contract(WBTCAddress, WBTC.abi, signer);
 
-    // import PriceFeed from "./artifacts/loans/PriceFeed.sol/PriceFeed";
-    // const ethPriceFeedAddress="0x4E9add5464c5FA00a6A858d7A4047e06886662Df";
-    // const croPriceFeedAddress="0xc1A57Bee847451E0A10c509f3cbF23feA37Bb8B3";
-    // const btcPriceFeedAddress="0x1644C7A87b823496dfEC30E33b0dE42acF8CF6c0";
+
     let croprice;
     let ethprice;
     let btcprice;
@@ -704,14 +586,14 @@ export default function App() {
 
       const recoverymode = isrecoverymode ? "Yes" : "No";
 
-      // setcropricefeed(croprice / 1000000000000000000);
+
       dispatch(
         setState({
           name: "cropricefeed",
           value: croprice / 1000000000000000000,
         })
       );
-      // setethpricefeed(ethprice / 1000000000000000000);
+
       dispatch(
         setState({
           name: "ethpricefeed",
@@ -724,7 +606,7 @@ export default function App() {
           value: btcprice / 1000000000000000000,
         })
       );
-      // setbtcpricefeed(btcprice / 1000000000000000000);
+
       dispatch(
         setState({
           name: "protocoltvl",
