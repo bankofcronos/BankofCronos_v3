@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { AiOutlineClose, AiOutlineSetting } from "react-icons/ai";
 import { Row, Col } from "react-bootstrap";
+import { debounce } from 'lodash';
 import useLocalStorage from "use-local-storage";
 import { BsGraphUp } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
@@ -258,206 +259,132 @@ export default function App() {
   } = state;
   const dispatch = useDispatch();
 
-  //handle resize
-  useEffect(() => {
-    function handleResize() {
-      const isConnected = localStorage.getItem("isConnected");
-      const usdcbalance = localStorage.getItem("usdcbalance");
-      const cusdbalance = localStorage.getItem("cusdbalance");
-      const crobalance = localStorage.getItem("crobalance");
-      const wcrobalance = localStorage.getItem("wcrobalance");
-      const wethbalance = localStorage.getItem("wethbalance");
-      const wbtcbalance = localStorage.getItem("wbtcbalance");
-      const bocbalance = localStorage.getItem("bocbalance");
-      const sbocbalance = localStorage.getItem("sbocbalance");
-      const treasurybalance = localStorage.getItem("treasurybalance");
-      const lpbalance = localStorage.getItem("lpbalance");
-      const connecterror = localStorage.getItem("connecterror");
-      const status = localStorage.getItem("status");
-      const mintsuccess = localStorage.getItem("mintsuccess");
-      const optionsState = localStorage.getItem("optionsState");
-      const connection = localStorage.getItem("connection");
-      const stakeamount = localStorage.getItem("stakeamount");
-      const unstakeamount = localStorage.getItem("unstakeamount");
-      const index = localStorage.getItem("index");
-      const reward = localStorage.getItem("reward");
-      const circsupply = localStorage.getItem("circsupply");
-      const rebasetime = localStorage.getItem("rebasetime");
-      const bondamount = localStorage.getItem("bondamount");
-      const bocprice = localStorage.getItem("bocprice");
-      const cusdprice = localStorage.getItem("cusdprice");
-      const bocbondprice = localStorage.getItem("bocbondprice");
-      const bocmaxbond = localStorage.getItem("bocmaxbond");
-      const bondtime = localStorage.getItem("bondtime");
-      const bondpurchased = localStorage.getItem("bondpurchased");
-      const bondvested = localStorage.getItem("bondvested");
-      const bondstatus = localStorage.getItem("bondstatus");
-      const totalsupply = localStorage.getItem("totalsupply");
-      const lptreasurybalance = localStorage.getItem("lptreasurybalance");
-      const lpbondamount = localStorage.getItem("lpbondamount");
-      const lpbocprice = localStorage.getItem("lpbocprice");
-      const lpbocbondprice = localStorage.getItem("lpbocbondprice");
-      const lpbocmaxbond = localStorage.getItem("lpbocmaxbond");
-      const lpbondtime = localStorage.getItem("lpbondtime");
-      const lpbondpurchased = localStorage.getItem("lpbondpurchased");
-      const lpbondvested = localStorage.getItem("lpbondvested");
-      const lpbondstatus = localStorage.getItem("lpbondstatus");
-      const address = localStorage.getItem("address");
-      const OpenLoanCard = localStorage.getItem("OpenLoanCard");
-      const cropricefeed = localStorage.getItem("cropricefeed");
-      const ethpricefeed = localStorage.getItem("ethpricefeed");
-      const btcpricefeed = localStorage.getItem("btcpricefeed");
-      const trovecrocol = localStorage.getItem("trovecrocol");
-      const troveethcol = localStorage.getItem("troveethcol");
-      const trovebtccol = localStorage.getItem("trovebtccol");
-      const trovedebt = localStorage.getItem("trovedebt");
-      const istroveactive = localStorage.getItem("istroveactive");
-      const newtrovecrocol = localStorage.getItem("newtrovecrocol");
-      const newtroveethcol = localStorage.getItem("newtroveethcol");
-      const newtrovebtccol = localStorage.getItem("newtrovebtccol");
-      const newtrovedebt = localStorage.getItem("newtrovedebt");
-      const protocolborrowfee = localStorage.getItem("protocolborrowfee");
-      const protocoltvl = localStorage.getItem("protocoltvl");
-      const protocoltrovecount = localStorage.getItem("protocoltrovecount");
-      const protocolcusdsupply = localStorage.getItem("protocolcusdsupply");
-      const protocoltcr = localStorage.getItem("protocoltcr");
-      const protocolisrecovery = localStorage.getItem("protocolisrecovery");
-      const protocolrecoverythreshold = localStorage.getItem(
-        "protocolrecoverythreshold"
-      );
-      const protocolSystemVC = localStorage.getItem("protocolSystemVC");
-      const protocolCROVC = localStorage.getItem("protocolCROVC");
-      const protocolBTCVC = localStorage.getItem("protocolBTCVC");
-      const protocolETHVC = localStorage.getItem("protocolETHVC");
-      const spdeposits = localStorage.getItem("spdeposits");
-      const newspdeposits = localStorage.getItem("newspdeposits");
-      const trovecrocolapproved = localStorage.getItem("trovecrocolapproved");
-      const troveethcolapproved = localStorage.getItem("troveethcolapproved");
-      const trovebtccolapproved = localStorage.getItem("trovebtccolapproved");
-      const showAgreementModal = localStorage.getItem("showAgreementModal");
-      const isAgreeToTermsPolicy = localStorage.getItem("isAgreeToTermsPolicy");
+function updateStatesFromLocalStorage() {
+    // Get data from localStorage and dispatch actions to update the state
+    const localStorageItems = [
+      "isConnected",
+      "usdcbalance",
+      "cusdbalance",
+      "crobalance",
+      "wcrobalance",
+      "wethbalance",
+      "wbtcbalance",
+      "bocbalance",
+      "sbocbalance",
+      "treasurybalance",
+      "lpbalance",
+      "connecterror",
+      "status",
+      "mintsuccess",
+      "optionsState",
+      "connection",
+      "stakeamount",
+      "unstakeamount",
+      "index",
+      "reward",
+      "circsupply",
+      "rebasetime",
+      "bondamount",
+      "bocprice",
+      "cusdprice",
+      "bocbondprice",
+      "bocmaxbond",
+      "bondtime",
+      "bondpurchased",
+      "bondvested",
+      "bondstatus",
+      "totalsupply",
+      "lptreasurybalance",
+      "lpbondamount",
+      "lpbocprice",
+      "lpbocbondprice",
+      "lpbocmaxbond",
+      "lpbondtime",
+      "lpbondpurchased",
+      "lpbondvested",
+      "lpbondstatus",
+      "address",
+      "OpenLoanCard",
+      "cropricefeed",
+      "ethpricefeed",
+      "btcpricefeed",
+      "trovecrocol",
+      "troveethcol",
+      "trovebtccol",
+      "trovedebt",
+      "istroveactive",
+      "newtrovecrocol",
+      "newtroveethcol",
+      "newtrovebtccol",
+      "newtrovedebt",
+      "protocolborrowfee",
+      "protocoltvl",
+      "protocoltrovecount",
+      "protocolcusdsupply",
+      "protocoltcr",
+      "protocolisrecovery",
+      "protocolrecoverythreshold",
+      "protocolSystemVC",
+      "protocolCROVC",
+      "protocolBTCVC",
+      "protocolETHVC",
+      "spdeposits",
+      "newspdeposits",
+      "trovecrocolapproved",
+      "troveethcolapproved",
+      "trovebtccolapproved",
+      "showAgreementModal",
+      "isAgreeToTermsPolicy",
+    ];
 
-      dispatch(
-        setState({ name: "IsAgreeToTermPolicy", value: isAgreeToTermsPolicy })
-      );
-      dispatch(
-        setState({ name: "ShowAgreementModal", value: showAgreementModal })
-      );
-      dispatch(setState({ name: "address", value: address }));
-      if (address) {
-        dispatch(
-          setState({
-            name: "address",
-            value:
-              address.substring(0, 4) +
-              "..." +
-              address.substring(address.length - 4, address.length),
-          })
-        );
+    localStorageItems.forEach((item) => {
+      const value = localStorage.getItem(item);
+      if (value !== null) {
+        dispatch(setState({ name: item, value }));
       }
+    });
 
-      dispatch(setState({ name: "usdcbalance", value: usdcbalance }));
-      dispatch(setState({ name: "cusdbalance", value: cusdbalance }));
-      dispatch(setState({ name: "wcrobalance", value: wcrobalance }));
-      dispatch(setState({ name: "crobalance", value: crobalance }));
-      dispatch(setState({ name: "wethbalance", value: wethbalance }));
-      dispatch(setState({ name: "wbtcbalance", value: wbtcbalance }));
-      dispatch(setState({ name: "bocbalance", value: bocbalance }));
-      dispatch(setState({ name: "sbocbalance", value: sbocbalance }));
-      dispatch(setState({ name: "treasurybalance", value: treasurybalance }));
-      dispatch(setState({ name: "lpbalance", value: lpbalance }));
-      dispatch(setState({ name: "cropricefeed", value: cropricefeed }));
-      dispatch(setState({ name: "ethpricefeed", value: ethpricefeed }));
-      dispatch(setState({ name: "btcpricefeed", value: btcpricefeed }));
-      dispatch(setState({ name: "trovecrocol", value: trovecrocol }));
-      dispatch(setState({ name: "rebasetime", value: rebasetime }));
-      dispatch(setState({ name: "connecterror", value: connecterror }));
-      dispatch(setState({ name: "status", value: status }));
-      dispatch(setState({ name: "mintsuccess", value: mintsuccess }));
-      dispatch(setState({ name: "optionsState", value: optionsState }));
-      dispatch(setState({ name: "connection", value: connection }));
-      dispatch(setState({ name: "stakeamount", value: stakeamount }));
-      dispatch(setState({ name: "unstakeamount", value: unstakeamount }));
-      dispatch(setState({ name: "index", value: index }));
-      dispatch(setState({ name: "reward", value: reward }));
-      dispatch(setState({ name: "circsupply", value: circsupply }));
-      dispatch(setState({ name: "bondamount", value: bondamount }));
-      dispatch(setState({ name: "bocprice", value: bocprice }));
-      dispatch(setState({ name: "cusdprice", value: cusdprice }));
-      dispatch(setState({ name: "bondbocprice", value: bocbondprice }));
-      dispatch(setState({ name: "bocmaxbond", value: bocmaxbond }));
-      dispatch(setState({ name: "bondtime", value: bondtime }));
-      dispatch(setState({ name: "bondpurchased", value: bondpurchased }));
-      dispatch(setState({ name: "bondvested", value: bondvested }));
-      dispatch(setState({ name: "bondstatus", value: bondstatus }));
-      dispatch(setState({ name: "totalsupply", value: totalsupply }));
-      dispatch(
-        setState({ name: "lptreasurybalance", value: lptreasurybalance })
-      );
-      dispatch(setState({ name: "lpbondamount", value: lpbondamount }));
-      dispatch(setState({ name: "lpbocprice", value: lpbocprice }));
-      dispatch(setState({ name: "lpbondbocprice", value: lpbocbondprice }));
-      dispatch(setState({ name: "lpbocmaxbond", value: lpbocmaxbond }));
-      dispatch(setState({ name: "lpbondtime", value: lpbondtime }));
-      dispatch(setState({ name: "lpbondpurchased", value: lpbondpurchased }));
-      dispatch(setState({ name: "lpbondvested", value: lpbondvested }));
-      dispatch(setState({ name: "lpbondstatus", value: lpbondstatus }));
-      dispatch(setState({ name: "OpenLoanCard", value: OpenLoanCard }));
-      dispatch(setState({ name: "troveethcol", value: troveethcol }));
-      dispatch(setState({ name: "trovebtccol", value: trovebtccol }));
-      dispatch(setState({ name: "trovedebt", value: trovedebt }));
-      dispatch(setState({ name: "newtrovecrocol", value: newtrovecrocol }));
-      dispatch(setState({ name: "newtroveethcol", value: newtroveethcol }));
-      dispatch(setState({ name: "newtrovebtccol", value: newtrovebtccol }));
-      dispatch(setState({ name: "newtrovedebt", value: newtrovedebt }));
-      dispatch(setState({ name: "istroveactive", value: istroveactive }));
-      dispatch(
-        setState({ name: "protocolborrowfee", value: protocolborrowfee })
-      );
-      dispatch(setState({ name: "protocoltvl", value: protocoltvl }));
-      dispatch(
-        setState({ name: "protocoltrovecount", value: protocoltrovecount })
-      );
-      dispatch(
-        setState({ name: "protocolcusdsupply", value: protocolcusdsupply })
-      );
-      dispatch(setState({ name: "protocoltcr", value: protocoltcr }));
-      dispatch(
-        setState({ name: "protocolisrecovery", value: protocolisrecovery })
-      );
+    const address = localStorage.getItem("address");
+    if (address) {
       dispatch(
         setState({
-          name: "protocolrecoverythreshold",
-          value: protocolrecoverythreshold,
+          name: "address",
+          value:
+            address.substring(0, 4) +
+            "..." +
+            address.substring(address.length - 4, address.length),
         })
       );
-      dispatch(setState({ name: "protocolSystemVC", value: protocolSystemVC }));
-      dispatch(setState({ name: "protocolCROVC", value: protocolCROVC }));
-      dispatch(setState({ name: "protocolBTCVC", value: protocolBTCVC }));
-      dispatch(setState({ name: "protocolETHVC", value: protocolETHVC }));
-      dispatch(setState({ name: "spdeposits", value: spdeposits }));
-      dispatch(setState({ name: "newspdeposits", value: newspdeposits }));
-      dispatch(
-        setState({ name: "trovecrocolapproved", value: trovecrocolapproved })
-      );
-      dispatch(
-        setState({ name: "troveethcolapproved", value: troveethcolapproved })
-      );
-      dispatch(
-        setState({ name: "trovebtccolapproved", value: trovebtccolapproved })
-      );
-
-      if (window.innerWidth > 900) {
-        dispatch(setState({ name: "openSideBar", value: true }));
-        dispatch(setState({ name: "indowWidth", value: window.innerWidth }));
-      } else {
-        dispatch(setState({ name: "openSideBar", value: false }));
-        dispatch(setState({ name: "indowWidth", value: window.innerWidth }));
-      }
     }
-    handleResize();
-    window.addEventListener("resize", handleResize);
-  }, [windowWidth, isConnected]);
+  }
+
+  function handleSidebarState() {
+    // Check window width and update the openSideBar state
+    if (window.innerWidth > 900) {
+      dispatch(setState({ name: "openSideBar", value: true }));
+      dispatch(setState({ name: "windowWidth", value: window.innerWidth }));
+    } else {
+      dispatch(setState({ name: "openSideBar", value: false }));
+      dispatch(setState({ name: "windowWidth", value: window.innerWidth }));
+    }
+  }
+
+  function handleResize() {
+    updateStatesFromLocalStorage();
+    handleSidebarState();
+  }
+
+  const debouncedHandleResize = debounce(handleResize, 250);
+
+  useEffect(() => {
+    updateStatesFromLocalStorage();
+    handleSidebarState();
+    window.addEventListener("resize", debouncedHandleResize);
+
+    return () => {
+      window.removeEventListener("resize", debouncedHandleResize);
+    };
+  }, []);
 
   const switchTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
