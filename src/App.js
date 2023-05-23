@@ -687,10 +687,11 @@ function updateStatesFromLocalStorage() {
           value: ethers.BigNumber.from(await sBOC.index()) / 1000000000,
         })
       );
+      console.log("DEBUG1: " + cusdPrice[0] + " and " + cusdPrice[1]);
       dispatch(
         setState({
           name: "cusdprice",
-          value: cusdPrice[0] / (cusdPrice[1] * 1000000000000000),
+          value: cusdPrice[0] / (cusdPrice[1] * 1000000000000),
         })
       );
 
@@ -1450,10 +1451,12 @@ function updateStatesFromLocalStorage() {
       console.log("trove debt: " + trovestateDebt);
       console.log("trove state whole" + trovestate);
 
+
+      console.log("DEBUG2: " + cusdlpreserves[0] + " and " + cusdlpreserves[1]);
       dispatch(
         setState({
-          name: "bocprice",
-          value: cusdlpreserves[0] / (cusdlpreserves[1] * 1000000000),
+          name: "cusdprice",
+          value: cusdlpreserves[0] / (cusdlpreserves[1] * 1000000000000),
         })
       );
       dispatch(
@@ -3229,7 +3232,7 @@ function updateStatesFromLocalStorage() {
                     onClick={() =>
                       dispatch(
                         setState({
-                          name: "isAgreeToTermPolicy",
+                          name: "isAgreeToTermsPolicy",
                           value: !isAgreeToTermsPolicy,
                         })
                       )
@@ -3260,7 +3263,7 @@ function updateStatesFromLocalStorage() {
                   className="approve_btn"
                   onClick={() => {
                     dispatch(
-                      setState({ name: "isAgreeToTermPolicy", value: true })
+                      setState({ name: "isAgreeToTermsPolicy", value: true })
                     );
                     dispatch(
                       setState({ name: "showAgreementModal", value: false })
