@@ -5,38 +5,37 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 :root {
   --background: white;
   --text-primary: black;
   --text-secondary: #808080;
-  --gradiant-primary: #BAC4C8;
-  --gradiant-secondary: #EDE9E3;
-  --gray: #E0E2E3;
+  --gradiant-primary: #bac4c8;
+  --gradiant-secondary: #ede9e3;
+  --gray: #e0e2e3;
+  --blue: #2874da;
 }
 
-[data-theme='dark'] {
-  --background: #222730;
-  --text-primary: white;
+[data-theme="dark"] {
+  --background: #000;
+  --text-primary: #e6eaed;
   --text-secondary: #808080;
-  --gradiant-primary: #3B4B5E;
-  --gradiant-secondary: #676B74;
-  --gray: #676B74;
+  --gradiant-primary: #3b4b5e;
+  --gradiant-secondary: #676b74;
+  --gray: #676b74;
+  --background-primary: #151718;
 }
-
-
 
 .card_container {
   max-width: 900px;
@@ -82,15 +81,14 @@ code {
   border-radius: 5px;
 }
 
-
 .form_btn:hover {
-  background-color: #ACC0CB;
+  background-color: #acc0cb;
   color: #000;
 }
 
 .form_btn-1 {
   border: 0;
-  background: #F8CC82;
+  background: #f8cc82;
   padding: 8px 10px;
   width: 100%;
   font-weight: bold;
@@ -100,14 +98,13 @@ code {
 
 .form_btn-2 {
   border: 0;
-  background: #F8CC82;
+  background: #f8cc82;
   padding: 8px 10px;
   min-width: 10%;
   font-weight: bold;
   color: rgb(53, 53, 53);
   border-radius: 5px;
 }
-
 
 .form_btn-1:hover {
   background-color: #f7b23a;
@@ -119,13 +116,11 @@ code {
 
 .form_poll_table {
   width: 99%;
-  min-width: 600px
+  min-width: 600px;
 }
 
-
-
 .form_poll_table tr th {
-  color: rgb(151, 151, 151)
+  color: rgb(151, 151, 151);
 }
 
 .form_poll_table tr td {
@@ -140,9 +135,8 @@ code {
   margin: 4px;
   outline: 0;
   font-weight: bold;
-  border: 1.5px solid rgb(79, 78, 78)
+  border: 1.5px solid rgb(79, 78, 78);
 }
-
 
 .form_poll_table tr td button:hover {
   padding: 5px;
@@ -166,7 +160,7 @@ code {
 }
 
 .pruple_btn:hover {
-  background-color: #ACC0CB;
+  background-color: #acc0cb;
   color: #000;
 }
 
@@ -177,13 +171,14 @@ code {
 }
 
 .loan_card .loan_card_header {
-  background: rgb(149, 149, 149);
   padding: 15px;
+  font-size: 1.2rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   gap: 2px;
   border-radius: 8px 8px 0 0;
+  color: var(--text-primary);
 }
 
 .loan_card .loan_card_body {
@@ -203,7 +198,7 @@ code {
 
 .loan_card .loan_card_body .loan_card_input_box input {
   border: 0;
-  outline: 0
+  outline: 0;
 }
 
 .loan_card .loan_card_body .loan_card_input_box button {
@@ -216,18 +211,16 @@ code {
 }
 
 .loan_card .blue_btn {
-  background: rgb(1, 54, 133);
-  color: #fff;
+  background: rgba(40, 116, 218, 0.3);
+  color: #2874da;
   padding: 12px 20px;
   font-weight: bold;
   border-radius: 4px;
-  border: 1px solid rgb(1, 54, 133);
 }
 
 .loan_card .blue_btn:hover {
-  background: #fff;
-  color: rgb(1, 54, 133);
-  border: 1px solid rgb(1, 54, 133);
+  background: rgba(1, 110, 252, 0.3);
+  color: #2874da;
 }
 
 .notification_box {
@@ -238,7 +231,8 @@ code {
 }
 
 .liquidy_card {
-  background: linear-gradient(200deg,#dddddd,#6d839e);
+  background-color: var(--background);
+  color: var(--text-primary);
   /* background: linear-gradient(200deg, rgb(212, 217, 252), rgb(202, 233, 249)); */
   padding: 10px;
   box-shadow: rgb(41 49 71 / 10%) 0px 8px 16px;
@@ -246,20 +240,26 @@ code {
 }
 
 .liquidy_card .protocol {
-  border-bottom: 1px solid black;
+  background-color: #21272e;
+  border-radius: 6px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  margin-bottom: 12px;
 }
 
 .liquidy_card .protocol .property {
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: bold;
   flex: 1;
   text-align: left;
 }
 
 .liquidy_card .protocol .value {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
 }
-
 
 .loans label {
   display: inline-block;
@@ -269,14 +269,14 @@ code {
   transition: all 0.3s;
   text-align: center;
   font-weight: bold;
-  border-radius: 5px
+  border-radius: 5px;
 }
 
 .loans input[type="radio"] {
   display: none;
 }
 
-.loans input[type="radio"]:checked+label {
+.loans input[type="radio"]:checked + label {
   background: rgb(135, 134, 134);
 }
 
@@ -299,7 +299,7 @@ code {
   }
 }
 
- /* to hide section on mobile devices */
+/* to hide section on mobile devices */
 @media (max-width: 767px) {
   .mobile-hide {
     display: none;
@@ -333,11 +333,10 @@ code {
   padding: 20px;
 }
 
-
 .main_card .card_box {
   /* flex: 1; */
   text-align: center;
-  padding: 5px
+  padding: 5px;
 }
 
 .card_title {
@@ -357,11 +356,6 @@ code {
   color: var(--text-primary);
 }
 
-
-
-
-
-
 .card_container {
   max-width: 900px;
   margin: 0 auto;
@@ -377,7 +371,7 @@ code {
 
 .bond_table_box {
   overflow-x: auto;
-  padding: 0 4%
+  padding: 0 4%;
 }
 
 /* 
@@ -419,9 +413,9 @@ code {
 
 .bond_table_btn:hover {
   border: 1px solid var(--text-primary);
-  background-color: #ACC0CB;
+  background-color: #acc0cb;
   color: #fff;
-  border: 1px solid #ACC0CB;
+  border: 1px solid #acc0cb;
 }
 
 .modal_header_btn {
@@ -442,7 +436,7 @@ code {
   padding: 10px;
   font-weight: bold;
   background: #a4b6c4;
-  color: #fff
+  color: #fff;
 }
 
 .bond_tab {
@@ -454,9 +448,8 @@ code {
   border-bottom: 2px solid #000;
 }
 
-
 .mobile {
-  display: none
+  display: none;
 }
 
 .mobile_table_th {
@@ -465,15 +458,13 @@ code {
 }
 
 @media screen and (max-width: 900px) {
-
   .desktop {
-    display: none
+    display: none;
   }
 
   .mobile {
-    display: block
+    display: block;
   }
-
 
   /* .bond_table {
       display: flex;
@@ -485,8 +476,6 @@ code {
       flex-direction: column
   } */
 }
-
-
 
 .sidebar_layout {
   position: fixed;
@@ -500,7 +489,7 @@ code {
   padding: 0 10px;
   z-index: 1;
   width: 100%;
-  max-width: 280px;
+  max-width: 250px;
   padding: 20px 10px;
   position: relative;
   max-height: 100vh;
@@ -508,7 +497,6 @@ code {
   overflow-y: auto;
   height: 100%;
 }
-
 
 .sidebar .sidebar_logo {
   width: 100%;
@@ -521,19 +509,20 @@ code {
 }
 
 .sidebar .sidebar_list .sidebar_list_item {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  padding: 10px 5px;
-  border-radius: 10px;
-  margin: 2px 0
+  padding: 10px 16px;
+  border-radius: 6px;
+  height: 48px;
+  margin: 2px 0;
 }
 
 .sidebar .sidebar_list .sidebar_list_item:hover {
-  background-color: var(--gray);
+  background-color: var(--blue);
 }
 
 .sidebar .sidebar_list .sidebar_list_item.active {
-  background-color: var(--gray);
+  background-color: var(--blue);
 }
 
 .sidebar .sidebar_list .sidebar_list_item .link {
@@ -552,7 +541,6 @@ code {
 
 .bond-sub:hover {
   background-color: var(--gray);
-
 }
 
 .icon {
@@ -619,8 +607,12 @@ code {
 
 .main_container {
   flex: 1;
-  background-image: linear-gradient(180deg, var(--gradiant-primary), var(--gradiant-secondary));
-  /* background-color: var(--background-parimary); */
+  /* background-image: linear-gradient(
+    180deg,
+    var(--gradiant-primary),
+    var(--gradiant-secondary)
+  ); */
+  background-color: var(--background-primary);
   width: 100%;
   overflow-y: scroll;
   height: 100vh;
@@ -629,11 +621,10 @@ code {
 .side_drawer {
   min-height: 100vh;
   overflow-y: auto;
-
 }
 
 .dark {
-  background-color: #090D18;
+  background-color: #090d18;
   color: #fff;
 }
 
@@ -642,39 +633,34 @@ code {
 }
 
 .light {
-  background-color: #fff
+  background-color: #fff;
 }
-
-
 
 .side_drawer .connect_wallet_btn {
   padding: 10px 30px;
   font-size: 17px;
   display: flex;
   align-items: center;
-  background: #E0E2E3;
+  background: #e0e2e3;
   border-radius: 5px;
-  color: #787C84;
+  color: #787c84;
   font-weight: bold;
   border: 0;
   outline: 0;
-  gap: 5px
+  gap: 5px;
 }
 
 .rs-drawer {
   max-width: 500px;
   width: 90% !important;
-
 }
 
 .rs-drawer-body {
   padding: 0px;
-
-
 }
 
 .rs-drawer-body-close {
-  display: none
+  display: none;
 }
 
 .rs-drawer-content {
@@ -682,7 +668,7 @@ code {
 }
 
 .drawer_tab {
-  background: #E0E2E3;
+  background: #e0e2e3;
 }
 
 .drawer_tab p {
@@ -690,12 +676,12 @@ code {
 }
 
 .drawer__footer {
-  max-width: 250px;
+  max-width: 230px;
   width: 100%;
 }
 
 .drawer_footer {
-  background-color: #E0E2E3;
+  background-color: #e0e2e3;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -704,7 +690,7 @@ code {
 }
 
 .light_blue_btn {
-  background: #759AAE;
+  background: #759aae;
   padding: 8px 12px;
   color: #fff;
   font-weight: bold;
@@ -722,7 +708,7 @@ code {
 }
 
 .wallet_card:hover {
-  background-color: #E0E2E3;
+  background-color: #e0e2e3;
 }
 
 .wallet_card .wallet_name {
@@ -732,13 +718,13 @@ code {
 
 .wallet_card .wallet_description {
   font-weight: 500;
-  color: rgb(148, 147, 147)
+  color: rgb(148, 147, 147);
 }
 
 .side_drawer_card {
   padding: 10px;
   margin: 5px 0;
-  background: #F0F0F0;
+  background: #f0f0f0;
   border-radius: 8px;
 }
 
@@ -754,22 +740,20 @@ code {
     max-width: 900px;
     width: 80%;
   }
-
 }
-
 
 .loan_card {
   background: var(--background);
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 
 .loan_card .loan_card_header {
-  background: rgb(149, 149, 149);
   padding: 15px;
   font-weight: bold;
   display: flex;
   align-items: center;
-  gap: 2px
+  gap: 2px;
+  border-bottom: 1px solid var(--background-primary);
 }
 
 .loan_card .loan_card_body {
@@ -784,18 +768,37 @@ code {
   border-radius: 4px;
 }
 
+.text-danger {
+  padding: 3px 6px;
+  border-radius: 20px;
+  color: #d73f3f;
+  background-color: rgba(215, 63, 63, 0.3);
+}
+
+.text-info {
+  background: #0d3300;
+  border-radius: 20px;
+  padding: 3px 6px;
+  color: #3fff00;
+}
+
+.bold {
+  font-weight: 700;
+  font-size: 16px;
+}
+
 .loan_card .loan_card_body .loan_card_input_box .loan_card_input_title {
   font-size: 14px;
 }
 
 .loan_card .loan_card_body .loan_card_input_box input {
   border: 0;
-  outline: 0
+  outline: 0;
 }
 
 .loan_card .loan_card_body .loan_card_input_box button {
   /* max buttons background color */
-  background-color:  #013685;
+  background-color: #013685;
   /* background: rgb(87, 9, 143); */
   color: #fff;
   padding: 5px 10px;

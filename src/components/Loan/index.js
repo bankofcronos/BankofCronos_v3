@@ -35,6 +35,8 @@ import mmfLogo from "../../assets/mmflogo.png";
 import VvsLogo from "../../assets/vvsfinancelogo.jpg";
 import BOCLOGO from "../../assets/CMC token logo.png";
 import BOCLogo from "../../assets/boctoken.png";
+import chart from "../../assets/chart-square.svg";
+import repeat from "../../assets/repeat.svg";
 import CUSDLogo from "../../assets/cusdtoken.png";
 
 const Loan = ({
@@ -273,229 +275,230 @@ const Loan = ({
               {windowWidth < 900 ? (
                 <br />
               ) : (
-                <div className=" loan_card">
-                  <div className="loan_card_header justify-content-between">
-                    <div className="d-flex align-items-center gap-2">
-                      <FaSwimmingPool />
-                      Token Balances
-                    </div>
-                  </div>
-                  <div className="loan_card_body">
-                    <Row>
-                      <Col
-                        xs={6}
-                        sm={6}
-                        md={2}
-                        style={{
-                          padding: 4,
-                        }}
-                        className="my-2"
-                      >
-                        <div className="text-center">
-                          <img
-                            src="https://seeklogo.com/images/C/cronos-cro-logo-29748E04B2-seeklogo.com.png"
-                            width="40px"
-                            alt=""
-                          />
-                          <p className="p-0 m-0 primary-color">CRO</p>
-                          <p className="p-0 m-0 primary-color">
-                            {Math.round(crobalance * 1000) / 1000}
-                          </p>
-                        </div>
-                      </Col>
-                      <Col
-                        xs={6}
-                        sm={6}
-                        md={2}
-                        style={{
-                          padding: 4,
-                        }}
-                        className="my-2"
-                      >
-                        <div className="text-center">
-                          <div className="token-balance-cards">
-                            <img src={WCROLogo} width="40px" alt="" />
-                            <p className="p-0 m-0 primary-color">WCRO</p>
-                            <p className="p-0 m-0 primary-color">
-                              {Math.round(wcrobalance * 1000) / 1000}
-                            </p>
-                          </div>
-                          <div style={{ marginTop: 6 }}>
-                            <p className="p-0 m-0 primary-color">
-                              <img src={CronaswapLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={
-                                  "https://app.cronaswap.org/swap?outputCurrency=" +
-                                  WCROAddress
-                                }
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            <p className="p-0 m-0 primary-color">
-                              <img src={mmfLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={
-                                  "https://cronosmm.finance/swap?outputCurrency=" +
-                                  WCROAddress
-                                }
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            <p className="p-0 m-0 primary-color">
-                              <img src={VvsLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={"https://cronosmm.finance/swap"}
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                          </div>
-                        </div>
-                      </Col>
+                ""
+                // <div className=" loan_card">
+                //   <div className="loan_card_header justify-content-between">
+                //     <div className="d-flex align-items-center gap-2">
+                //       {/* <FaSwimmingPool /> */}
+                //       Token Balances
+                //     </div>
+                //   </div>
+                //   <div className="loan_card_body">
+                //     <Row>
+                //       <Col
+                //         xs={6}
+                //         sm={6}
+                //         md={2}
+                //         style={{
+                //           padding: 4,
+                //         }}
+                //         className="my-2"
+                //       >
+                //         <div className="text-center">
+                //           <img
+                //             src="https://seeklogo.com/images/C/cronos-cro-logo-29748E04B2-seeklogo.com.png"
+                //             width="40px"
+                //             alt=""
+                //           />
+                //           <p className="p-0 m-0 primary-color bold">CRO</p>
+                //           <p className="p-0 m-0 primary-color bold">
+                //             {Math.round(crobalance * 1000) / 1000}
+                //           </p>
+                //         </div>
+                //       </Col>
+                //       <Col
+                //         xs={6}
+                //         sm={6}
+                //         md={2}
+                //         style={{
+                //           padding: 4,
+                //         }}
+                //         className="my-2"
+                //       >
+                //         <div className="text-center">
+                //           <div className="token-balance-cards">
+                //             <img src={WCROLogo} width="40px" alt="" />
+                //             <p className="p-0 m-0 primary-color  bold">WCRO</p>
+                //             <p className="p-0 m-0 primary-color  bold">
+                //               {Math.round(wcrobalance * 1000) / 1000}
+                //             </p>
+                //           </div>
+                //           <div style={{ marginTop: 6 }}>
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={CronaswapLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={
+                //                   "https://app.cronaswap.org/swap?outputCurrency=" +
+                //                   WCROAddress
+                //                 }
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={mmfLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={
+                //                   "https://cronosmm.finance/swap?outputCurrency=" +
+                //                   WCROAddress
+                //                 }
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={VvsLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={"https://cronosmm.finance/swap"}
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //           </div>
+                //         </div>
+                //       </Col>
 
-                      <Col
-                        xs={6}
-                        sm={6}
-                        md={2}
-                        style={{
-                          padding: 4,
-                        }}
-                      >
-                        <div className="text-center">
-                          <div className="token-balance-cards">
-                            <img src={BOCLogo} width="40px" alt="" />
-                            <p className="p-0 m-0 primary-color">BOC</p>
-                            <p className="p-0 m-0 primary-color">
-                              {Math.round(bocbalance * 1000) / 1000}{" "}
-                            </p>
-                          </div>
-                          <div style={{ marginTop: 6 }}>
-                            <p className="p-0 m-0 primary-color">
-                              <img src={CronaswapLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={
-                                  "https://app.cronaswap.org/swap?outputCurrency=" +
-                                  BOCAddress
-                                }
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            {/*
-                            <p className="p-0 m-0 primary-color">
-                              <img src={mmfLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={
-                                  "https://cronosmm.finance/swap?outputCurrency=" +
-                                  BOCAddress
-                                }
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            <p className="p-0 m-0 primary-color">
-                              <img src={VvsLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={"https://cronosmm.finance/swap"}
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            */}
-                          </div>
-                        </div>
-                      </Col>
-                      <Col
-                        xs={6}
-                        sm={6}
-                        md={2}
-                        style={{
-                          padding: 4,
-                        }}
-                      >
-                        <div className="text-center">
-                          <div className="token-balance-cards">
-                            <img src={CUSDLogo} width="40px" alt="" />
-                            <p className="p-0 m-0 primary-color">CUSD</p>
-                            <p className="p-0 m-0 primary-color">
-                              {Math.round(cusdbalance * 1000) / 1000}{" "}
-                            </p>
-                          </div>
-                          <div style={{ marginTop: 6 }}>
-                            <p className="p-0 m-0 primary-color">
-                              <img src={CronaswapLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={
-                                  "https://app.cronaswap.org/swap?outputCurrency=" +
-                                  CUSDAddress
-                                }
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            {/*
-                            <p className="p-0 m-0 primary-color">
-                              <img src={mmfLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={
-                                  "https://cronosmm.finance/swap?outputCurrency=" +
-                                  CUSDAddress
-                                }
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            <p className="p-0 m-0 primary-color">
-                              <img src={VvsLogo} width="20px" alt="" />
-                              &nbsp;&nbsp;
-                              <a
-                                target="_blank"
-                                href={"https://cronosmm.finance/swap"}
-                                rel="noreferrer"
-                              >
-                                <FaExchangeAlt />
-                              </a>{" "}
-                            </p>
-                            */}
-                          </div>
-                        </div>
-                      </Col>
-                    </Row>
-                    <div></div>
+                //       <Col
+                //         xs={6}
+                //         sm={6}
+                //         md={2}
+                //         style={{
+                //           padding: 4,
+                //         }}
+                //       >
+                //         <div className="text-center">
+                //           <div className="token-balance-cards">
+                //             <img src={BOCLogo} width="40px" alt="" />
+                //             <p className="p-0 m-0 primary-color  bold">BOC</p>
+                //             <p className="p-0 m-0 primary-color  bold">
+                //               {Math.round(bocbalance * 1000) / 1000}{" "}
+                //             </p>
+                //           </div>
+                //           <div style={{ marginTop: 6 }}>
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={CronaswapLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={
+                //                   "https://app.cronaswap.org/swap?outputCurrency=" +
+                //                   BOCAddress
+                //                 }
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             {/*
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={mmfLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={
+                //                   "https://cronosmm.finance/swap?outputCurrency=" +
+                //                   BOCAddress
+                //                 }
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={VvsLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={"https://cronosmm.finance/swap"}
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             */}
+                //           </div>
+                //         </div>
+                //       </Col>
+                //       <Col
+                //         xs={6}
+                //         sm={6}
+                //         md={2}
+                //         style={{
+                //           padding: 4,
+                //         }}
+                //       >
+                //         <div className="text-center">
+                //           <div className="token-balance-cards">
+                //             <img src={CUSDLogo} width="40px" alt="" />
+                //             <p className="p-0 m-0 primary-color bold">CUSD</p>
+                //             <p className="p-0 m-0 primary-color bold">
+                //               {Math.round(cusdbalance * 1000) / 1000}{" "}
+                //             </p>
+                //           </div>
+                //           <div style={{ marginTop: 6 }}>
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={CronaswapLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={
+                //                   "https://app.cronaswap.org/swap?outputCurrency=" +
+                //                   CUSDAddress
+                //                 }
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             {/*
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={mmfLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={
+                //                   "https://cronosmm.finance/swap?outputCurrency=" +
+                //                   CUSDAddress
+                //                 }
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             <p className="p-0 m-0 primary-color">
+                //               <img src={VvsLogo} width="20px" alt="" />
+                //               &nbsp;&nbsp;
+                //               <a
+                //                 target="_blank"
+                //                 href={"https://cronosmm.finance/swap"}
+                //                 rel="noreferrer"
+                //               >
+                //                 <FaExchangeAlt />
+                //               </a>{" "}
+                //             </p>
+                //             */}
+                //           </div>
+                //         </div>
+                //       </Col>
+                //     </Row>
+                //     <div></div>
 
-                    <br />
-                  </div>
-                </div>
+                //     <br />
+                //   </div>
+                // </div>
               )}
               <div className="loan_card">
                 <div className="loan_card_header gap-2">
-                  <FaSwimmingPool />
+                  {/* <FaSwimmingPool /> */}
                   Loan
                 </div>
                 <div className="loan_card_body">
@@ -913,7 +916,7 @@ const Loan = ({
               <div className="loan_card">
                 <div className="loan_card_header justify-content-between">
                   <div className="d-flex align-items-center gap-2">
-                    <FaSwimmingPool />
+                    {/* <FaSwimmingPool /> */}
                     Stability Pool
                   </div>
                   <p className="p-0 m-0"></p>
@@ -1024,7 +1027,7 @@ const Loan = ({
               <div className="loan_card">
                 <div className="loan_card_header justify-content-between">
                   <div className="d-flex align-items-center gap-2">
-                    <FaSwimmingPool />
+                    {/* <FaSwimmingPool /> */}
                     Liquidation/Redemption
                   </div>
                   <p className="p-0 m-0"></p>
@@ -1229,8 +1232,11 @@ const Loan = ({
             >
               <div className="d-flex gap-2 align-items-center justify-content-between">
                 <div>
-                  <BsGraphUp />
-                  &nbsp;&nbsp; Loans Protocol Statistics
+                  {/* <BsGraphUp /> */}
+                  {/* &nbsp;&nbsp;{" "} */}
+                  <span style={{ fontSize: "20px", fontWeight: "bold" }}>
+                    Loans Protocol Statistics
+                  </span>
                   <br></br>
                 </div>
                 <div>
@@ -1300,8 +1306,8 @@ const Loan = ({
                       height="40px"
                       alt=""
                     />
-                    <p className="m-0">CRO</p>
-                    <p className="m-0">
+                    <p className="m-0 bold">CRO</p>
+                    <p className="m-0 bold">
                       ${Math.round(cropricefeed * 1000) / 1000}
                     </p>
                     <p>
@@ -1314,7 +1320,7 @@ const Loan = ({
                         "https://tectonic.gitbook.io/docs/developer/price-oracle"
                       }
                     >
-                      <FaSatelliteDish />
+                      <img src={chart} width="16px" height="16px"></img>
                     </a>
                     &nbsp;&nbsp;
                     <a
@@ -1323,7 +1329,7 @@ const Loan = ({
                         "https://cronoscan.com/address/0x4636ac8216805fe96de9e7afc62da99096a930f6"
                       }
                     >
-                      <FaFileContract />
+                      <img src={repeat} width="16px" height="16px"></img>
                     </a>
                     <div className="m-0 d-flex align-items-center justify-content-center"></div>
                   </div>
@@ -1337,14 +1343,18 @@ const Loan = ({
                 >
                   <div className="text-center">
                     <img
-                      style={{ objectFit: "contain" }}
+                      style={{
+                        objectFit: "contain",
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                      }}
                       src={WCROLogo}
                       width="40px"
                       height="40px"
                       alt=""
                     />
-                    <p className="m-0">WCRO</p>
-                    <p className="m-0">
+                    <p className="m-0 bold">WCRO</p>
+                    <p className="m-0 bold">
                       ${Math.round(cropricefeed * 1000) / 1000}
                     </p>
                     <p>
@@ -1357,7 +1367,7 @@ const Loan = ({
                         "https://tectonic.gitbook.io/docs/developer/price-oracle"
                       }
                     >
-                      <FaSatelliteDish />
+                      <img src={chart} width="16px" height="16px"></img>
                     </a>
                     &nbsp;&nbsp;
                     <a
@@ -1366,7 +1376,7 @@ const Loan = ({
                         "https://cronoscan.com/address/0xb3df0a9582361db08ec100bd5d8cb70fa8579f4b"
                       }
                     >
-                      <FaFileContract />
+                      <img src={repeat} width="16px" height="16px"></img>
                     </a>
                   </div>
                 </Col>
@@ -1385,12 +1395,31 @@ const Loan = ({
                       height="40px"
                       alt=""
                     />
-                    <p className="m-0">CUSD</p>
-                    <p className="m-0">${Math.round(cusdprice * 100) / 100}</p>
+                    <p className="m-0 bold">CUSD</p>
+                    <p className="m-0 bold">
+                      ${Math.round(cusdprice * 100) / 100}
+                    </p>
                     <p>
                       Market Price{" "}
                       <Popper content="Bank of Cronos token market price as per CUSD/USDC Cronaswap Liquidity Pool" />
                     </p>
+                    <a
+                      title="Tectonic Oracles"
+                      href={
+                        "https://tectonic.gitbook.io/docs/developer/price-oracle"
+                      }
+                    >
+                      <img src={chart} width="16px" height="16px"></img>
+                    </a>
+                    &nbsp;&nbsp;
+                    <a
+                      title="Tectonic BTC Pricefeed contract"
+                      href={
+                        "https://cronoscan.com/address/0xb3df0a9582361db08ec100bd5d8cb70fa8579f4b"
+                      }
+                    >
+                      <img src={repeat} width="16px" height="16px"></img>
+                    </a>
                   </div>
                 </Col>
                 <Col
@@ -1407,20 +1436,44 @@ const Loan = ({
                       width="40px"
                       alt=""
                     />
-                    <p className="m-0">BOC</p>
-                    <p className="m-0">$ {Math.round(bocprice * 100) / 100}</p>
+                    <p className="m-0 bold">BOC</p>
+                    <p className="m-0 bold">
+                      $ {Math.round(bocprice * 100) / 100}
+                    </p>
                     <p>
                       Market Price{" "}
                       <Popper content="Bank of Cronos token market price as per BOC/USDC Cronaswap Liquidity Pool" />
                     </p>
+                    <a
+                      title="Tectonic Oracles"
+                      href={
+                        "https://tectonic.gitbook.io/docs/developer/price-oracle"
+                      }
+                    >
+                      <img src={chart} width="16px" height="16px"></img>
+                    </a>
+                    &nbsp;&nbsp;
+                    <a
+                      title="Tectonic BTC Pricefeed contract"
+                      href={
+                        "https://cronoscan.com/address/0xb3df0a9582361db08ec100bd5d8cb70fa8579f4b"
+                      }
+                    >
+                      <img src={repeat} width="16px" height="16px"></img>
+                    </a>
                   </div>
                 </Col>
               </Row>
 
               <div>
-                <h3>Protocol</h3>
+                <span
+                  style={{ fontSize: "20px", fontWeight: "bold" }}
+                  className="m-1"
+                >
+                  Protocol
+                </span>
 
-                <div className="d-flex py-1 m-1 protocol ">
+                <div className="d-flex py-1 protocol ">
                   <p className="m-0 property ">
                     Borrowing Fee{" "}
                     <Popper
@@ -1432,7 +1485,7 @@ const Loan = ({
                   <p className="m-0 value">0.5%</p>
                 </div>
 
-                <div className="d-flex py-1 m-1 protocol">
+                <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     TVL{" "}
                     <Popper
@@ -1446,7 +1499,7 @@ const Loan = ({
                   </p>
                 </div>
 
-                <div className="d-flex py-1 m-1 protocol">
+                <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     Number of Active Loans{" "}
                     <Popper
@@ -1458,7 +1511,7 @@ const Loan = ({
                   </p>
                 </div>
 
-                <div className="d-flex py-1 m-1 protocol">
+                <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     CUSD supply <Popper content={"Total CUSD token supply."} />
                   </p>
@@ -1467,7 +1520,7 @@ const Loan = ({
                   </p>
                 </div>
 
-                <div className="d-flex py-1 m-1 protocol">
+                <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     CUSD in Stability Pool{" "}
                     <Popper content={"Total CUSD in Stability Pool."} />
@@ -1477,7 +1530,7 @@ const Loan = ({
                   </p>
                 </div>
 
-                <div className="d-flex py-1 m-1 protocol">
+                <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     Total Collateral Ratio{" "}
                     <Popper
@@ -1491,7 +1544,7 @@ const Loan = ({
                   </p>
                 </div>
 
-                <div className="d-flex py-1 m-1 protocol">
+                <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     Recovery Mode{" "}
                     <Popper
@@ -1503,17 +1556,17 @@ const Loan = ({
                   <p className="m-0 value">{protocolisrecovery}</p>
                 </div>
 
-                <div className="d-flex py-1 m-1 protocol">
+                <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     Recovery Mode Collateral Ratio Threshold
                   </p>
                   <p className="m-0 value">{protocolrecoverythreshold}%</p>
                 </div>
               </div>
-              <div className="py-2">
+              {/* <div className="py-2">
                 <p className="m-0">Deployed: 3/09/2023, 4:33:10AM</p>
                 <p className="m-0">Frontend version: 1.0.1</p>
-              </div>
+              </div> */}
             </div>
           </Col>
         </Row>

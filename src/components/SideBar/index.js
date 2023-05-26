@@ -60,20 +60,18 @@ const SideBar = ({ theme }) => {
           ) : null}
           <ul className="sidebar_list p-0">
             <li
-              className={
-                currentPath === "/"
-                  ? "sidebar_list_item active"
-                  : "sidebar_list_item"
-              }
               onClick={() => {
                 dispatch(setState({ name: "currentPath", value: "/" }));
                 windowWidth < 900
                   ? toggleSideBar()
                   : dispatch(setState({ name: "currentPath", value: "/" }));
               }}
+              className={`sidebar_list_item ${
+                currentPath === "/" ? "active" : ""
+              }`}
             >
               <Link to="/" className="link">
-                <GoSettings /> <span>Dashboard</span>
+                <BsCashStack /> <span>Loans</span>
               </Link>
             </li>
             <li
@@ -193,25 +191,6 @@ const SideBar = ({ theme }) => {
               <Link to="/stake" className="link">
                 <RiStackLine />
                 <span>Stake</span>
-              </Link>
-            </li>
-            <li
-              onClick={() => {
-                dispatch(setState({ name: "currentPath", value: "/loans" }));
-                windowWidth < 900
-                  ? toggleSideBar()
-                  : dispatch(
-                      setState({ name: "currentPath", value: "/loans" })
-                    );
-              }}
-              className={`sidebar_list_item ${
-                currentPath === "/loans" ? "active" : ""
-              }`}
-              // className="sidebar_list_item "
-            >
-              <Link to="/loans" className="link">
-                <BsCashStack /> <span>Loans</span>
-                <p className="m-0 text-info fw-light fs-6"></p>
               </Link>
             </li>
           </ul>

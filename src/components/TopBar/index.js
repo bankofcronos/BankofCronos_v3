@@ -40,13 +40,13 @@ const TopBar = ({ switchTheme, theme }) => {
             <span>Connect</span>
           </button>
         )}
-        <button
+        {/* <button
           className="top_bar_btn"
           style={{ opacity: isScrolling ? 0.5 : 1 }}
           onClick={switchTheme}
         >
           {theme !== "dark" ? <HiLightBulb /> : <HiMoon />}
-        </button>
+        </button> */}
       </div>
     </>
   );

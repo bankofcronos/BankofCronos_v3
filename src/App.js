@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { AiOutlineClose, AiOutlineSetting } from "react-icons/ai";
 import { Row, Col } from "react-bootstrap";
-import { debounce } from 'lodash';
+import { debounce } from "lodash";
 import useLocalStorage from "use-local-storage";
 import { BsGraphUp } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
@@ -259,7 +259,7 @@ export default function App() {
   } = state;
   const dispatch = useDispatch();
 
-function updateStatesFromLocalStorage() {
+  function updateStatesFromLocalStorage() {
     // Get data from localStorage and dispatch actions to update the state
     const localStorageItems = [
       "isConnected",
@@ -467,7 +467,6 @@ function updateStatesFromLocalStorage() {
     const weth = new ethers.Contract(WETHAddress, WETH.abi, signer);
     const wbtc = new ethers.Contract(WBTCAddress, WBTC.abi, signer);
 
-
     let croprice;
     let ethprice;
     let btcprice;
@@ -512,7 +511,6 @@ function updateStatesFromLocalStorage() {
       ] = results;
 
       const recoverymode = isrecoverymode ? "Yes" : "No";
-
 
       dispatch(
         setState({
@@ -1450,7 +1448,6 @@ function updateStatesFromLocalStorage() {
       console.log("trove state: " + trovestatecolbtcAmt);
       console.log("trove debt: " + trovestateDebt);
       console.log("trove state whole" + trovestate);
-
 
       console.log("DEBUG2: " + cusdlpreserves[0] + " and " + cusdlpreserves[1]);
       dispatch(
@@ -2873,7 +2870,7 @@ function updateStatesFromLocalStorage() {
 
           <div onScroll={handleScroll} className="main_container">
             <Switch>
-              <Route exact path="/">
+              {/* <Route exact path="/">
                 <Dashboard
                   isConnecting={isConnecting}
                   totalsupply={totalsupply}
@@ -2882,7 +2879,7 @@ function updateStatesFromLocalStorage() {
                   circsupply={circsupply}
                   index={index}
                 />
-              </Route>
+              </Route> */}
               <Route path="/bond">
                 <Bond
                   isConnected={isConnected}
@@ -2897,7 +2894,7 @@ function updateStatesFromLocalStorage() {
                   theme={theme}
                 />
               </Route>
-              <Route path="/loans">
+              <Route exact path="/">
                 <Loan
                   windowWidth={windowWidth}
                   crobalance={crobalance}
