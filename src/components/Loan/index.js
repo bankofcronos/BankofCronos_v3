@@ -37,6 +37,14 @@ import BOCLOGO from "../../assets/CMC token logo.png";
 import BOCLogo from "../../assets/boctoken.png";
 import chart from "../../assets/chart-square.svg";
 import repeat from "../../assets/repeat.svg";
+import Export from "../../assets/export.svg";
+import vector from "../../assets/Vector.svg";
+import circledI from "../../assets/Group 53.svg";
+import fuel from "../../assets/Group 55.svg";
+import hand from "../../assets/Group 59.svg";
+import dollar from "../../assets/Group 60.svg";
+import upChart from "../../assets/Group 61.svg";
+import question from "../../assets/question.svg";
 import CUSDLogo from "../../assets/cusdtoken.png";
 
 const Loan = ({
@@ -506,7 +514,12 @@ const Loan = ({
                     <div>
                       <div className="loan_card_input_box">
                         <p className="p-0 m-0 loan_card_input_title">
-                          <img src={WCROLogo} width="20px" alt="" />
+                          <img
+                            src={WCROLogo}
+                            width="20px"
+                            alt=""
+                            style={{ borderRadius: "50%" }}
+                          />
                           &nbsp;&nbsp; WCRO Collateral
                         </p>
                         <div className="d-flex">
@@ -570,13 +583,14 @@ const Loan = ({
                       </div>
 
                       <div className="notification_box d-flex align-items-center gap-2">
-                        <HiInformationCircle
+                        {/* <HiInformationCircle
                           style={{
                             fontSize: "25px",
                             margin: 0,
                             padding: 0,
                           }}
-                        />
+                        /> */}
+                        <img src={circledI}></img>
                         {Math.round(
                           ((newtrovecrocol * cropricefeed +
                             newtroveethcol * ethpricefeed +
@@ -708,49 +722,35 @@ const Loan = ({
                       ) : (
                         <a></a>
                       )}
-                      <div className="d-flex align-items-center gap-2 py-3">
-                        <div>
-                          <FaGasPump
-                            style={{
-                              fontSize: "30px",
-                              margin: 0,
-                              padding: 0,
-                            }}
-                            className="primary-color"
-                          />
+                      <div className="d-flex align-items-center gap-2 py-3 open_loan_list">
+                        <div className="icon">
+                          <img src={fuel}></img>
                         </div>
                         <div>
-                          <p
-                            className="p-0 m-0 primary-color"
-                            style={{ fontSize: "12px" }}
-                          >
+                          <p className="p-0 m-0" style={{ fontSize: "14px" }}>
                             Liquidation Reverse
                           </p>
-                          <p className="p-0 m-0 primary-color">
-                            <b>20</b> USD
+                          <p
+                            className="p-0 m-0 primary-color"
+                            style={{ fontSize: "20px" }}
+                          >
+                            <b>20 USD</b>
                           </p>
                         </div>
                       </div>
 
-                      <div className="d-flex align-items-center gap-2 py-3">
-                        <div>
-                          <FaHandHoldingUsd
-                            style={{
-                              fontSize: "30px",
-                              margin: 0,
-                              padding: 0,
-                            }}
-                            className="primary-color"
-                          />
+                      <div className="d-flex align-items-center gap-2 py-3 open_loan_list">
+                        <div className="icon">
+                          <img src={hand}></img>
                         </div>
                         <div>
-                          <p
-                            className="p-0 m-0 primary-color"
-                            style={{ fontSize: "12px" }}
-                          >
+                          <p className="p-0 m-0" style={{ fontSize: "14px" }}>
                             Fixed Loan Fee
                           </p>
-                          <p className="p-0 m-0 primary-color">
+                          <p
+                            className="p-0 m-0 primary-color"
+                            style={{ fontSize: "20px" }}
+                          >
                             <b>
                               {parseFloat(newtrovedebt) -
                                 parseFloat(trovedebt) <
@@ -768,25 +768,18 @@ const Loan = ({
                         </div>
                       </div>
 
-                      <div className="d-flex align-items-center gap-2 py-3">
-                        <div>
-                          <FaDollarSign
-                            style={{
-                              fontSize: "30px",
-                              margin: 0,
-                              padding: 0,
-                            }}
-                            className="primary-color"
-                          />
+                      <div className="d-flex align-items-center gap-2 py-3 open_loan_list">
+                        <div className="icon">
+                          <img src={dollar}></img>
                         </div>
                         <div>
-                          <p
-                            className="p-0 m-0 primary-color primary-color"
-                            style={{ fontSize: "12px" }}
-                          >
+                          <p className="p-0 m-0" style={{ fontSize: "14px" }}>
                             Total Loan Amount
                           </p>
-                          <p className="p-0 m-0 primary-color primary-color">
+                          <p
+                            className="p-0 m-0 primary-color"
+                            style={{ fontSize: "20px" }}
+                          >
                             {Math.round(
                               (parseFloat(newtrovedebt) -
                                 parseFloat(trovedebt) +
@@ -798,25 +791,18 @@ const Loan = ({
                           </p>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center gap-2 py-3">
-                        <div>
-                          <FaChartLine
-                            style={{
-                              fontSize: "30px",
-                              margin: 0,
-                              padding: 0,
-                            }}
-                            className="primary-color"
-                          />
+                      <div className="d-flex align-items-center gap-2 py-3 open_loan_list">
+                        <div className="icon">
+                          <img src={upChart}></img>
                         </div>
                         <div>
-                          <p
-                            className="p-0 m-0 primary-color primary-color"
-                            style={{ fontSize: "12px" }}
-                          >
+                          <p className="p-0 m-0" style={{ fontSize: "14px" }}>
                             Collateral Ratio
                           </p>
-                          <p className="p-0 m-0 primary-color primary-color">
+                          <p
+                            className="p-0 m-0 primary-color"
+                            style={{ fontSize: "20px" }}
+                          >
                             {newtrovedebt <= 0
                               ? 0.0
                               : Math.round(
@@ -835,7 +821,10 @@ const Loan = ({
                     <div>
                       <p className="my-2">
                         <b className="d-flex align-items-center gap-1 primary-color">
-                          <Popper />
+                          <img
+                            src={vector}
+                            style={{ marginRight: "0.5rem" }}
+                          ></img>
                           You haven't borrowed any CUSD yet.
                         </b>
                       </p>
@@ -848,7 +837,7 @@ const Loan = ({
                           rel="noreferrer"
                         >
                           {" "}
-                          How do Loans work? <FaExternalLinkAlt />
+                          How do Loans work? <img src={Export}></img>
                         </a>
                       </p>
                       <br />
@@ -939,26 +928,22 @@ const Loan = ({
                         </div>
                       </div>
 
-                      <div className="d-flex align-items-center gap-2 p-3">
+                      <div className="d-flex align-items-center gap-2 p-3 pool-share">
                         <div>
-                          <p
-                            className="p-0 m-0 primary-color"
-                            style={{ fontSize: "12px" }}
-                          >
+                          <p className="p-0 m-0" style={{ fontSize: "12px" }}>
                             Poll Share
                           </p>
-                          <p className="p-0 m-0 primary-color">0.000000 %</p>
+                          <p
+                            className="p-0 m-0 primary-color"
+                            style={{ fontSize: "20px", fontWeight: "bold" }}
+                          >
+                            0.000000 %
+                          </p>
                         </div>
                       </div>
 
                       <div className="notification_box d-flex align-items-center gap-2">
-                        <HiInformationCircle
-                          style={{
-                            fontSize: "25px",
-                            margin: 0,
-                            padding: 0,
-                          }}
-                        />
+                        <img src={circledI}></img>
                         <p className="p-0 m-0 ">
                           Enter the amount of CUSD you'd like to deposit into
                           Stability Pool.
@@ -969,7 +954,10 @@ const Loan = ({
                     <div>
                       <p className="my-2">
                         <b className="d-flex align-items-center gap-1 primary-color">
-                          <Popper />
+                          <img
+                            src={vector}
+                            style={{ marginRight: "0.5rem" }}
+                          ></img>
                           You have no CUSD in the Stability Pool.
                         </b>
                       </p>
@@ -983,7 +971,7 @@ const Loan = ({
                           rel="noreferrer"
                         >
                           {" "}
-                          What is the Stability Pool? <FaExternalLinkAlt />
+                          What is the Stability Pool? <img src={Export}></img>
                         </a>
                       </p>
                       <br />
@@ -1037,8 +1025,8 @@ const Loan = ({
                     {loadingUsers ? (
                       "loading..."
                     ) : (
-                      <div>
-                        <Row>
+                      <div className="liq-red-container">
+                        <Row className="headings">
                           <Col>
                             <b className="d-flex align-items-center gap-1 primary-color">
                               Address
@@ -1073,21 +1061,25 @@ const Loan = ({
                         </Row>
                         {users.map((e, i) => {
                           return (
-                            <Row>
-                              <Col title={e.address}>
-                                {e.address.slice(0, 5)}...{e.address.slice(-4)}
-                              </Col>
-                              <Col>
-                                {Math.round(e.trovestatecolcroAmt * 1000) /
-                                  1000}
-                              </Col>
-                              {/*
+                            <>
+                              <hr></hr>
+                              <Row>
+                                <Col title={e.address}>
+                                  {e.address.slice(0, 5)}...
+                                  {e.address.slice(-4)}
+                                </Col>
+                                <Col>
+                                  {Math.round(e.trovestatecolcroAmt * 1000) /
+                                    1000}
+                                </Col>
+                                {/*
                               <Col>{e.trovestatecolethAmt}</Col>
                               <Col>{e.trovestatecolbtcAmt}</Col>
                               */}
-                              <Col>$ {e.trovestateDebt}</Col>
-                              <Col>{e.colRatio} %</Col>
-                            </Row>
+                                <Col>$ {e.trovestateDebt.toFixed(2)}</Col>
+                                <Col>{e.colRatio} %</Col>
+                              </Row>
+                            </>
                           );
                         })}
                       </div>
@@ -1128,13 +1120,7 @@ const Loan = ({
                       </div>
 
                       <div className="notification_box d-flex align-items-center gap-2">
-                        <HiInformationCircle
-                          style={{
-                            fontSize: "25px",
-                            margin: 0,
-                            padding: 0,
-                          }}
-                        />
+                        <img src={circledI}></img>
                         <p className="p-0 m-0 ">
                           Enter the amount of CUSD you'd like to redeem for
                           system collateral.
@@ -1145,7 +1131,10 @@ const Loan = ({
                     <div>
                       <p className="my-2">
                         <b className="d-flex align-items-center gap-1 primary-color">
-                          <Popper />
+                          <img
+                            src={vector}
+                            style={{ marginRight: "0.5rem" }}
+                          ></img>
                           You can Liquidate Loans under minimum collateral ratio
                           (%110 or %150 when protocol is in recovery mode).
                         </b>
@@ -1160,7 +1149,7 @@ const Loan = ({
                           rel="noreferrer"
                         >
                           {" "}
-                          What are Redemptions? <FaExternalLinkAlt />
+                          What are Redemptions? <img src={Export}></img>
                         </a>
                       </p>
                       <br />
@@ -1476,7 +1465,8 @@ const Loan = ({
                 <div className="d-flex py-1 protocol ">
                   <p className="m-0 property ">
                     Borrowing Fee{" "}
-                    <Popper
+                    <img
+                      src={question}
                       content={
                         "The Bank of Cronos Loans protocol applies a fixed 0.5% fee (when not in recovery mode). See documentation on fee calculations."
                       }
@@ -1488,7 +1478,8 @@ const Loan = ({
                 <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     TVL{" "}
-                    <Popper
+                    <img
+                      src={question}
                       content={
                         "TVL includes all Collateral in the system + Stability Pool Deposits."
                       }
@@ -1502,7 +1493,8 @@ const Loan = ({
                 <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     Number of Active Loans{" "}
-                    <Popper
+                    <img
+                      src={question}
                       content={"Number of loans active in the protocol."}
                     />
                   </p>
@@ -1513,7 +1505,8 @@ const Loan = ({
 
                 <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
-                    CUSD supply <Popper content={"Total CUSD token supply."} />
+                    CUSD supply{" "}
+                    <img src={question} content={"Total CUSD token supply."} />
                   </p>
                   <p className="m-0 value">
                     $ {Math.round(protocolcusdsupply * 100) / 100}
@@ -1523,7 +1516,10 @@ const Loan = ({
                 <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     CUSD in Stability Pool{" "}
-                    <Popper content={"Total CUSD in Stability Pool."} />
+                    <img
+                      src={question}
+                      content={"Total CUSD in Stability Pool."}
+                    />
                   </p>
                   <p className="m-0 value">
                     $ {Math.round(spdeposits * 100) / 100}
@@ -1533,7 +1529,8 @@ const Loan = ({
                 <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     Total Collateral Ratio{" "}
-                    <Popper
+                    <img
+                      src={question}
                       content={
                         "System Total Collateral Ratio. If this ratio is below 150%, the system will enter recovery mode."
                       }
@@ -1547,7 +1544,8 @@ const Loan = ({
                 <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     Recovery Mode{" "}
-                    <Popper
+                    <img
+                      src={question}
                       content={
                         "Recovery mode is enabled once total collateral ratio is under 150%. In recovery mode all individual Loans with collateral ratio under 150% can be liquidated."
                       }

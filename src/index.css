@@ -189,7 +189,7 @@ code {
   background: #fff;
   margin: 5px 0;
   padding: 15px;
-  box-shadow: 2px 2px 2px rgb(192, 192, 192);
+  font-weight: bold;
 }
 
 .loan_card .loan_card_body .loan_card_input_box .loan_card_input_title {
@@ -202,8 +202,6 @@ code {
 }
 
 .loan_card .loan_card_body .loan_card_input_box button {
-  background: rgb(1, 54, 133);
-  color: #fff;
   padding: 5px 10px;
   border: 0;
   font-weight: 600;
@@ -223,8 +221,30 @@ code {
   color: #2874da;
 }
 
+.pool-share {
+  border: 1px solid #21272e;
+  border-radius: 6px;
+}
+
+.open_loan_list {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.open_loan_list .icon {
+  background-color: rgba(41, 66, 203, 0.1);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .notification_box {
-  border: 2px solid purple;
   padding: 10px;
   border-radius: 5px;
   background: rgb(224, 255, 254);
@@ -535,12 +555,15 @@ code {
 
 .bond-sub {
   padding: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
+  font-weight: 400;
   cursor: pointer;
+  width: 100%;
+  margin-left: 1rem;
 }
 
 .bond-sub:hover {
-  background-color: var(--gray);
+  background-color: var(--blue);
 }
 
 .icon {
@@ -561,15 +584,26 @@ code {
   width: 100%;
 }
 
+.top_bar .top_nav_info {
+  display: flex;
+  align-items: center;
+}
+
+.top_bar .top_nav_info .user_info {
+  display: flex;
+  padding: 0 0.5rem;
+  align-items: center;
+}
+
 .top_bar .top_bar_btn {
   padding: 0px 15px;
   height: 40px;
   margin: 5px;
-  font-size: 17px;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
-  background: var(--background);
-  color: var(--text-primary);
+  background: rgba(40, 116, 218, 0.3);
+  color: #2874da;
   border-radius: 5px;
   border: 0;
   outline: 0;
@@ -578,8 +612,8 @@ code {
 }
 
 .top_bar .top_bar_btn:hover {
-  background: rgb(108, 108, 108);
-  color: #fff;
+  background: rgba(69, 144, 240, 0.3);
+  color: #2874da;
 }
 
 .sidebar_toggle_btn {
@@ -761,11 +795,15 @@ code {
 }
 
 .loan_card .loan_card_body .loan_card_input_box {
-  background: #fff;
+  background: #21272e;
+  color: #fff;
   margin: 5px 0;
   padding: 15px;
-  box-shadow: 2px 2px 2px rgb(192, 192, 192);
   border-radius: 4px;
+}
+
+.loan_card .loan_card_body .loan_card_input_box input {
+  background-color: #21272e;
 }
 
 .text-danger {
@@ -776,7 +814,7 @@ code {
 }
 
 .text-info {
-  background: #0d3300;
+  background: rgba(63, 255, 0, 0.2);
   border-radius: 20px;
   padding: 3px 6px;
   color: #3fff00;
@@ -798,11 +836,11 @@ code {
 
 .loan_card .loan_card_body .loan_card_input_box button {
   /* max buttons background color */
-  background-color: #013685;
+  background: transparent;
+  color: #2874da;
+  border: 1px solid #2874da;
   /* background: rgb(87, 9, 143); */
-  color: #fff;
   padding: 5px 10px;
-  border: 0;
   font-weight: bold;
   border-radius: 4px;
 }
@@ -835,8 +873,20 @@ code {
 }
 
 .notification_box {
-  border: 2px solid #013685;
+  background: transparent;
   padding: 10px;
+  margin-bottom: 15px;
   border-radius: 5px;
-  background: rgb(224, 255, 254);
+}
+
+.liq-red-container {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.4rem;
+  color: #fff;
+}
+
+.liq-red-container .headings {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
 }

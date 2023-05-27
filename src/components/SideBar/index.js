@@ -11,6 +11,9 @@ import { FaBook, FaDiscord } from "react-icons/fa";
 import { AiFillMediumSquare, AiOutlineTwitter } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { selectState, setState } from "../../features/state/stateSlice";
+import arrowSquareDown from "../../assets/arrow-square-down.svg";
+import moneyRec from "../../assets/money-recive.svg";
+import line from "../../assets/Vector 1.svg";
 
 const SideBar = ({ theme }) => {
   const state = useSelector(selectState);
@@ -55,9 +58,9 @@ const SideBar = ({ theme }) => {
               alt=""
             />
           </div>
-          {isConnected ? (
+          {/* {isConnected ? (
             <p className="text-center primary-color">{address}</p>
-          ) : null}
+          ) : null} */}
           <ul className="sidebar_list p-0">
             <li
               onClick={() => {
@@ -71,7 +74,7 @@ const SideBar = ({ theme }) => {
               }`}
             >
               <Link to="/" className="link">
-                <BsCashStack /> <span>Loans</span>
+                <img src={moneyRec}></img> <span>Loans</span>
               </Link>
             </li>
             <li
@@ -84,93 +87,123 @@ const SideBar = ({ theme }) => {
               }}
             >
               <div
-                className={`sidebar_list_item link d-flex align-items-center justify-content-between ${
+                className={`sidebar_list_item d-flex align-items-center justify-content-between ${
                   currentPath === "/bond" ? "active" : ""
                 }`}
               >
                 <Link to="/bond" className="link ">
-                  <AiOutlineSetting /> <span>Bond</span>
+                  <AiOutlineSetting /> <span>Bond</span>{" "}
                 </Link>
-                <RiArrowDownSLine className="icon" type="button" />
+                <img src={arrowSquareDown}></img>
               </div>
               {showBond ? (
                 <div className="p-2 px-4">
-                  <p
-                    className="m-0 primary-color pb-2"
-                    style={{ fontSize: "12px" }}
-                  >
-                    Live Bonds
-                  </p>
                   <div
-                    className="bond-sub d-flex align-items-center justify-content-between"
-                    onClick={() => {
-                      dispatch(
-                        setState({ name: "modalShowBond", value: true })
-                      );
-                      dispatch(
-                        setState({ name: "currentPath", value: "/bond" })
-                      );
-                    }}
+                    className="d-flex align-item-center"
+                    style={{ position: "relative" }}
                   >
-                    <p className="m-0 primary-color">USDC</p>
-                    {isConnecting ? (
-                      <h5 className="placeholder-glow">
-                        <span className="placeholder col-3"></span>
-                      </h5>
-                    ) : (
-                      <p
-                        className={
-                          Math.round(
-                            (bocprice / bocbondprice - 1) * 100 * 100
-                          ) /
-                            100 >=
-                          0
-                            ? "m-0 text-success"
-                            : "m-0 text-danger"
-                        }
-                      >
-                        {Math.round((bocprice / bocbondprice - 1) * 100 * 100) /
-                          100}{" "}
-                        %
-                      </p>
-                    )}
+                    <img
+                      src={line}
+                      style={{ top: "-50%", position: "absolute" }}
+                    ></img>
+                    <div
+                      className="bond-sub d-flex align-items-center justify-content-between"
+                      onClick={() => {
+                        dispatch(
+                          setState({ name: "modalShowBond", value: true })
+                        );
+                        dispatch(
+                          setState({ name: "currentPath", value: "/bond" })
+                        );
+                      }}
+                    >
+                      <p className="m-0 primary-color">USDC</p>
+                      {isConnecting ? (
+                        <h5 className="placeholder-glow">
+                          <span className="placeholder col-3"></span>
+                        </h5>
+                      ) : (
+                        <p
+                          className={
+                            Math.round(
+                              (bocprice / bocbondprice - 1) * 100 * 100
+                            ) /
+                              100 >=
+                            0
+                              ? "m-0 text-success"
+                              : "m-0 text-danger"
+                          }
+                        >
+                          {parseInt(
+                            Math.abs(
+                              Math.round(
+                                (bocprice / bocbondprice - 1) * 100 * 100
+                              )
+                            ) / 100
+                          )}{" "}
+                          %
+                        </p>
+                      )}
+                    </div>
                   </div>
                   <div
-                    className="bond-sub d-flex align-items-center justify-content-between"
-                    onClick={() =>
-                      dispatch(setState({ name: "bondModal2", value: true }))
-                    }
+                    className="d-flex align-item-center"
+                    style={{ position: "relative" }}
                   >
-                    <p className="m-0 primary-color">BOC/USDC LP</p>
-                    {isConnecting ? (
-                      <h5 className="placeholder-glow">
-                        <span className="placeholder col-3"></span>
-                      </h5>
-                    ) : (
-                      <p
-                        className={
-                          Math.round(
-                            (bocprice / bocbondprice - 1) * 100 * 100
-                          ) /
-                            100 >=
-                          0
-                            ? "m-0 text-success"
-                            : "m-0 text-danger"
-                        }
-                      >
-                        {Math.round(
-                          (lpbocprice / lpbocbondprice - 1) * 100 * 100
-                        ) / 100}{" "}
-                        %
-                      </p>
-                    )}
+                    <img
+                      src={line}
+                      style={{ top: "-50%", position: "absolute" }}
+                    ></img>
+                    <div
+                      className="bond-sub d-flex align-items-center justify-content-between"
+                      onClick={() =>
+                        dispatch(setState({ name: "bondModal2", value: true }))
+                      }
+                    >
+                      <p className="m-0 primary-color">BOC/USDC LP</p>
+                      {isConnecting ? (
+                        <h5 className="placeholder-glow">
+                          <span className="placeholder col-3"></span>
+                        </h5>
+                      ) : (
+                        <p
+                          className={
+                            Math.round(
+                              (bocprice / bocbondprice - 1) * 100 * 100
+                            ) /
+                              100 >=
+                            0
+                              ? "m-0 text-success"
+                              : "m-0 text-danger"
+                          }
+                        >
+                          {parseInt(
+                            Math.abs(
+                              Math.round(
+                                (lpbocprice / lpbocbondprice - 1) * 100 * 100
+                              )
+                            ) / 100
+                          )}{" "}
+                          %
+                        </p>
+                      )}
+                    </div>
                   </div>
                   <div
-                    className="bond-sub d-flex align-items-center justify-content-between"
-                    // onClick={() => setBondModal(true)}
+                    className="d-flex align-item-center"
+                    style={{ position: "relative" }}
                   >
-                    <p className="m-0 primary-color">CUSD</p>
-                    <p className="m-0 text-info">Coming Soon</p>
+                    <img
+                      src={line}
+                      style={{ top: "-50%", position: "absolute" }}
+                    ></img>
+                    <div
+                      className="bond-sub d-flex align-items-center justify-content-between"
+                      // onClick={() => setBondModal(true)}
+                    >
+                      <p className="m-0 primary-color">CUSD</p>
+                      <p className="m-0 text-info">Coming Soon</p>
+                    </div>
                   </div>
                 </div>
               ) : null}
@@ -196,7 +229,7 @@ const SideBar = ({ theme }) => {
           </ul>
           <div className="position-fixed bottom-0 left-0 drawer__footer">
             <ul className="sidebar_list p-0 py-3">
-              <li className="sidebar_list_item ">
+              <li className="sidebar_list_item">
                 <a
                   href="https://bank-of-cronos.gitbook.io/docs/"
                   className="link"
