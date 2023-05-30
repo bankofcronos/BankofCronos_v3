@@ -73,27 +73,27 @@ code {
 
 .form_btn {
   border: 0;
-  background: #93afbd;
+  background: rgba(40, 116, 218, 0.3);
   padding: 8px 10px;
   width: 100%;
   font-weight: bold;
-  color: #fff;
-  border-radius: 5px;
+  color: var(--blue);
+  border-radius: 6px;
+  font-size: 1.2rem;
 }
 
 .form_btn:hover {
-  background-color: #acc0cb;
-  color: #000;
+  background-color: var(--blue);
+  color: #fff;
 }
 
 .form_btn-1 {
   border: 0;
-  background: #f8cc82;
-  padding: 8px 10px;
-  width: 100%;
+  background: var(--blue);
+  padding: 0.9rem 2.5rem;
   font-weight: bold;
-  color: rgb(53, 53, 53);
-  border-radius: 5px;
+  color: #fff;
+  border-radius: 6px;
 }
 
 .form_btn-2 {
@@ -106,9 +106,9 @@ code {
   border-radius: 5px;
 }
 
-.form_btn-1:hover {
+/* .form_btn-1:hover {
   background-color: #f7b23a;
-}
+} */
 
 .form_poll_table_box {
   overflow-x: auto;
@@ -355,13 +355,57 @@ code {
 
 .main_card .card_box {
   /* flex: 1; */
-  text-align: center;
-  padding: 5px;
+  padding: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.main_card .stake_card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.main_card .stake_info {
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 1.1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.main_card .loan_card_input_box {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.main_card .stake_card_input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main_card .stake_card_input .stake_token {
+  width: 9rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+}
+
+.main_card .bond_price_card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin-right: 1rem;
+}
+
+.main_card .bond_input_box {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px 6px 0 0;
 }
 
 .card_title {
-  color: gray;
-  font-weight: bold;
+  color: #626262;
   font-size: 18px;
   padding: 0;
   margin: 0;
@@ -370,7 +414,7 @@ code {
 
 .card_value {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 24px;
   padding: 0;
   margin: 0;
   color: var(--text-primary);
@@ -391,7 +435,21 @@ code {
 
 .bond_table_box {
   overflow-x: auto;
-  padding: 0 4%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 6px 6px;
+}
+
+.bond_table_box tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bond_table_box tr:last-child {
+  border-bottom: none;
+}
+
+td {
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 
 /* 
@@ -422,20 +480,17 @@ code {
 }
 
 .bond_table_btn {
-  padding: 10px 5px;
+  padding: 8px 15px;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
   width: 100%;
   background-color: transparent;
-  border: 1px solid var(--text-primary);
-  color: var(--text-primary);
+  border: 1px solid var(--blue);
+  color: var(--blue);
   border-radius: 5px;
   margin: 2px 0;
-}
-
-.bond_table_btn:hover {
-  border: 1px solid var(--text-primary);
-  background-color: #acc0cb;
-  color: #fff;
-  border: 1px solid #acc0cb;
+  font-size: 1.2rem;
 }
 
 .modal_header_btn {
@@ -459,13 +514,36 @@ code {
   color: #fff;
 }
 
+.bond_tab_stake {
+  color: var(--blue);
+  background-color: rgba(40, 116, 218, 0.3);
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 6px 0 0 6px;
+  padding: 0.9rem 2.8rem;
+}
+
+.bond_tab_stake:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.bond_tab_stake.active {
+  color: #fff;
+  background-color: var(--blue);
+}
+
 .bond_tab {
-  color: var(--text-secondary);
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.bond_tab:hover {
   cursor: pointer;
 }
 
 .bond_tab.active {
-  border-bottom: 2px solid #000;
+  color: var(--blue);
+  border-bottom: 1px solid var(--blue);
 }
 
 .mobile {
@@ -806,6 +884,15 @@ code {
   background-color: #21272e;
 }
 
+.lpinfo {
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 1.1rem;
+  color: #fff;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
+
 .text-danger {
   padding: 3px 6px;
   border-radius: 20px;
@@ -846,7 +933,6 @@ code {
 }
 
 .stake-input {
-  border: 1px solid rgb(180, 180, 180);
   padding: 6px 10px;
   border-radius: 5px;
 }

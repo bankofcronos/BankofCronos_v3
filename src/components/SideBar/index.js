@@ -106,12 +106,13 @@ const SideBar = ({ theme }) => {
                       src={line}
                       style={{ top: "-50%", position: "absolute" }}
                     ></img>
-                    <div
+                    <Link
                       className="bond-sub d-flex align-items-center justify-content-between"
+                      to="/usdc"
                       onClick={() => {
-                        dispatch(
-                          setState({ name: "modalShowBond", value: true })
-                        );
+                        // dispatch(
+                        //   setState({ name: "modalShowBond", value: true })
+                        // );
                         dispatch(
                           setState({ name: "currentPath", value: "/bond" })
                         );
@@ -144,7 +145,7 @@ const SideBar = ({ theme }) => {
                           %
                         </p>
                       )}
-                    </div>
+                    </Link>
                   </div>
                   <div
                     className="d-flex align-item-center"
@@ -154,11 +155,15 @@ const SideBar = ({ theme }) => {
                       src={line}
                       style={{ top: "-50%", position: "absolute" }}
                     ></img>
-                    <div
+                    <Link
                       className="bond-sub d-flex align-items-center justify-content-between"
-                      onClick={() =>
-                        dispatch(setState({ name: "bondModal2", value: true }))
-                      }
+                      to="bocusdclp"
+                      onClick={() => {
+                        // dispatch(setState({ name: "bondModal2", value: true }))
+                        dispatch(
+                          setState({ name: "currentPath", value: "/bond" })
+                        );
+                      }}
                     >
                       <p className="m-0 primary-color">BOC/USDC LP</p>
                       {isConnecting ? (
@@ -187,7 +192,7 @@ const SideBar = ({ theme }) => {
                           %
                         </p>
                       )}
-                    </div>
+                    </Link>
                   </div>
                   <div
                     className="d-flex align-item-center"

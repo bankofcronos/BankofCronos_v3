@@ -1467,7 +1467,7 @@ const Loan = ({
                     Borrowing Fee{" "}
                     <img
                       src={question}
-                      content={
+                      title={
                         "The Bank of Cronos Loans protocol applies a fixed 0.5% fee (when not in recovery mode). See documentation on fee calculations."
                       }
                     />
@@ -1480,7 +1480,7 @@ const Loan = ({
                     TVL{" "}
                     <img
                       src={question}
-                      content={
+                      title={
                         "TVL includes all Collateral in the system + Stability Pool Deposits."
                       }
                     />
@@ -1495,7 +1495,7 @@ const Loan = ({
                     Number of Active Loans{" "}
                     <img
                       src={question}
-                      content={"Number of loans active in the protocol."}
+                      title={"Number of loans active in the protocol."}
                     />
                   </p>
                   <p className="m-0 value">
@@ -1506,7 +1506,7 @@ const Loan = ({
                 <div className="d-flex py-1 protocol">
                   <p className="m-0 property">
                     CUSD supply{" "}
-                    <img src={question} content={"Total CUSD token supply."} />
+                    <img src={question} title={"Total CUSD token supply."} />
                   </p>
                   <p className="m-0 value">
                     $ {Math.round(protocolcusdsupply * 100) / 100}
@@ -1518,7 +1518,7 @@ const Loan = ({
                     CUSD in Stability Pool{" "}
                     <img
                       src={question}
-                      content={"Total CUSD in Stability Pool."}
+                      title={"Total CUSD in Stability Pool."}
                     />
                   </p>
                   <p className="m-0 value">
@@ -1531,7 +1531,7 @@ const Loan = ({
                     Total Collateral Ratio{" "}
                     <img
                       src={question}
-                      content={
+                      title={
                         "System Total Collateral Ratio. If this ratio is below 150%, the system will enter recovery mode."
                       }
                     />
@@ -1546,7 +1546,7 @@ const Loan = ({
                     Recovery Mode{" "}
                     <img
                       src={question}
-                      content={
+                      title={
                         "Recovery mode is enabled once total collateral ratio is under 150%. In recovery mode all individual Loans with collateral ratio under 150% can be liquidated."
                       }
                     />

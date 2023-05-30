@@ -8,6 +8,8 @@ import {
   Bond,
   Loan,
   Stake,
+  BocUsdcLp,
+  Usdc,
 } from "./components";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
@@ -2894,6 +2896,18 @@ export default function App() {
                   theme={theme}
                 />
               </Route>
+              <Route path="/bocusdclp">
+                <BocUsdcLp
+                  approve_lpbond_BOC={approve_lpbond_BOC}
+                  buy_lpbond_BOC={buy_lpbond_BOC}
+                  redeem_lpbond_BOC={redeem_lpbond_BOC}
+                />
+              </Route>
+
+              <Route path="/usdc">
+                <Usdc />
+              </Route>
+
               <Route exact path="/">
                 <Loan
                   windowWidth={windowWidth}
@@ -3170,7 +3184,7 @@ export default function App() {
           </Drawer>
 
           {/* agreement modal */}
-          <Modal
+          {/* <Modal
             show={showAgreementModal}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
@@ -3272,7 +3286,7 @@ export default function App() {
               </div>
               <br />
             </Modal.Body>
-          </Modal>
+          </Modal> */}
 
           <Modal
             show={bondModal2}

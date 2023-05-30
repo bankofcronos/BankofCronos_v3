@@ -23,7 +23,8 @@ const DefaultPopover = ({ content }) => {
             fontSize: "10px",
             fontWeight: 400,
             lineHeight: "10px",
-            minWidth: "150px",
+            minWidth: "440px",
+            minHeight: "330px",
             zIndex: 1,
           }}
         >

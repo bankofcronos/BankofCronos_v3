@@ -7,6 +7,8 @@ import BOCLOGO from "../../assets/CMC token logo.png";
 import { Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { selectState, setState } from "../../features/state/stateSlice";
+import Export from "../../assets/export1.svg";
+import I from "../../assets/Vector.svg";
 
 const Bond = ({ theme }) => {
   const [isBond, setIsBond] = useState(true);
@@ -31,16 +33,16 @@ const Bond = ({ theme }) => {
     <>
       <div className="container">
         <br /> <br /> <br /> <br />
-        <div className="card_container">
+        <div className="card_container" style={{ width: "100%" }}>
           <div className="main_card">
-            {isBond ? (
+            {/* {isBond ? (
               <h3 className="primary-color">Bond</h3>
             ) : (
               <h3 className="primary-color">Inverse Bond</h3>
-            )}
+            )} */}
             <br />
             <div className="d-flex flex-column flex-md-row">
-              <div className="card_box col-12 col-md-6">
+              <div className="card_box col-12 col-md-4  bond_price_card">
                 <p className="card_title">BOC Treasury</p>
 
                 {isConnecting ? (
@@ -53,8 +55,11 @@ const Bond = ({ theme }) => {
                   </h3>
                 )}
               </div>
-              <div className="card_box col-12 col-md-6">
-                <p className="card_title"> BOC Price </p>
+              <div className="card_box col-12 col-md-4 bond_price_card">
+                <p className="card_title">
+                  {" "}
+                  BOC Price <img src={I} width="12px" height="12px"></img>
+                </p>
 
                 {isConnecting ? (
                   <h5 className="placeholder-glow">
@@ -68,7 +73,7 @@ const Bond = ({ theme }) => {
               </div>
             </div>
             <br />
-            <div className="d-flex justify-content-center py-4 gap-4">
+            <div className="d-flex p-4 gap-4 bond_input_box">
               <div
                 onClick={() => setIsBond(true)}
                 className={isBond ? "bond_tab active " : "bond_tab"}
@@ -81,19 +86,74 @@ const Bond = ({ theme }) => {
               >
                 Inverse Bond
               </div>
+              <div
+                style={{
+                  backgroundColor: "var(--blue)",
+                  borderRadius: "10px",
+                  color: "#fff",
+                  padding: "0 1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  height: "1.4rem",
+                }}
+              >
+                Coming Soon
+              </div>
             </div>
             {isBond ? (
-              <div className="bond_table_box">
+              <div className="bond_table_box px-4">
                 <table className="bond_table desktop">
                   <tr>
-                    <th>Token</th>
-                    <th>Payout Asset</th>
-                    <th>Price</th>
-                    <th>Discount</th>
-                    <th></th>
+                    <th
+                      style={{
+                        fontSize: "1rem",
+                        color: "#fff",
+                        padding: "0.6rem 0",
+                      }}
+                    >
+                      Token
+                    </th>
+                    <th
+                      style={{
+                        fontSize: "1rem",
+                        color: "#fff",
+                        padding: "0.6rem 0",
+                      }}
+                    >
+                      Payout Asset
+                    </th>
+                    <th
+                      style={{
+                        fontSize: "1rem",
+                        color: "#fff",
+                        padding: "0.6rem 0",
+                      }}
+                    >
+                      Price
+                    </th>
+                    <th
+                      style={{
+                        fontSize: "1rem",
+                        color: "#fff",
+                        padding: "0.6rem 0",
+                      }}
+                    >
+                      Discount
+                    </th>
+                    <th
+                      style={{
+                        fontSize: "1rem",
+                        color: "#fff",
+                        padding: "0.6rem 0",
+                      }}
+                    ></th>
                   </tr>
                   <tr>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       <div className="d-flex align-items-center gap-2">
                         <img
                           src="https://bankofcronos.com/wp-content/uploads/2022/01/usdc.webp"
@@ -105,41 +165,49 @@ const Bond = ({ theme }) => {
                           <p className="p-0 m-0 lh-1  primary-color">
                             <b>USDC</b>
                           </p>
-                          <p className="p-0 m-0 lh-1  primary-color">
+                          <p className="p-0 m-0 lh-1">
                             <b>
                               Get Asset
-                              <Link
+                              <a
                                 to="https://app.cronaswap.org/swap?outputCurrency=0xc21223249ca28397b4b6541dffaecc539bff0c59"
                                 className="primary-color"
                               >
                                 {" "}
-                                <FaExternalLinkAlt />{" "}
-                              </Link>
+                                <img src={Export}></img>{" "}
+                              </a>
                             </b>
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       <div className="d-flex align-items-center gap-2">
                         <img src={BOCLOGO} width="30px" alt="" />
                         <div>
                           <p className="p-0 m-0 lh-1  primary-color">
                             <b>BOC</b>
                           </p>
-                          <p className="p-0 m-0 lh-1  primary-color">
+                          <p className="p-0 m-0 lh-1">
                             <b>
-                              Get Asset
+                              Explore
                               <Link to="" className="primary-color">
                                 {" "}
-                                <FaExternalLinkAlt />{" "}
+                                <img src={Export}></img>{" "}
                               </Link>
                             </b>
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       <p className="p-0 m-0  primary-color">
                         {isConnecting ? (
                           <h5 className="placeholder-glow">
@@ -150,13 +218,20 @@ const Bond = ({ theme }) => {
                         )}
                       </p>
                     </td>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       {isConnecting ? (
                         <h5 className="placeholder-glow">
                           <span className="placeholder col-10"></span>
                         </h5>
                       ) : (
-                        <p className="p-0 m-0 text-danger">
+                        <p
+                          className="p-0 m-0 text-danger"
+                          style={{ width: "5rem", textAlign: "center" }}
+                        >
                           {Math.round(
                             (bocprice / bocbondprice - 1) * 100 * 1000
                           ) / 1000}{" "}
@@ -164,21 +239,30 @@ const Bond = ({ theme }) => {
                         </p>
                       )}
                     </td>
-                    <td>
-                      <button
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
+                      <Link
                         className="bond_table_btn"
+                        to="/usdc"
                         onClick={() =>
                           dispatch(
-                            setState({ name: "modalShowBond", value: true })
+                            setState({ name: "currentPath", value: "/bond" })
                           )
                         }
                       >
                         Bond
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                   <tr>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       <div className="d-flex align-items-center gap-2">
                         <img
                           src="https://bankofcronos.com/wp-content/uploads/2022/02/LPUSD.png"
@@ -190,7 +274,7 @@ const Bond = ({ theme }) => {
                           <p className="p-0 m-0 lh-1  primary-color">
                             <b>BOC USDC LP</b>
                           </p>
-                          <p className="p-0 m-0 lh-1  primary-color">
+                          <p className="p-0 m-0 lh-1">
                             <b>
                               Get Asset
                               <Link
@@ -198,33 +282,41 @@ const Bond = ({ theme }) => {
                                 className="primary-color"
                               >
                                 {" "}
-                                <FaExternalLinkAlt />{" "}
+                                <img src={Export}></img>{" "}
                               </Link>
                             </b>
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       <div className="d-flex align-items-center gap-2">
                         <img src={BOCLOGO} width="30px" alt="" />
                         <div>
                           <p className="p-0 m-0 lh-1  primary-color">
                             <b>BOC</b>
                           </p>
-                          <p className="p-0 m-0 lh-1  primary-color">
+                          <p className="p-0 m-0 lh-1">
                             <b>
-                              Get Asset
+                              Explore
                               <Link to="" className="primary-color">
                                 {" "}
-                                <FaExternalLinkAlt />{" "}
+                                <img src={Export}></img>{" "}
                               </Link>
                             </b>
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       <p className="p-0 m-0  primary-color">
                         {isConnecting ? (
                           <h5 className="placeholder-glow">
@@ -235,31 +327,43 @@ const Bond = ({ theme }) => {
                         )}
                       </p>
                     </td>
-                    <td>
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
                       {isConnecting ? (
                         <h5 className="placeholder-glow">
                           <span className="placeholder col-10"></span>
                         </h5>
                       ) : (
-                        <p className="p-0 m-0 text-danger">
+                        <div
+                          className="p-0 m-0 text-danger"
+                          style={{ width: "5rem", textAlign: "center" }}
+                        >
                           {Math.round(
                             (lpbocprice / lpbocbondprice - 1) * 100 * 1000
                           ) / 1000}{" "}
                           %
-                        </p>
+                        </div>
                       )}
                     </td>
-                    <td>
-                      <button
+                    <td
+                      style={{
+                        padding: "0.6rem 0",
+                      }}
+                    >
+                      <Link
                         className="bond_table_btn"
+                        to="/bocusdclp"
                         onClick={() =>
                           dispatch(
-                            setState({ name: "bondModal2", value: true })
+                            setState({ name: "currentPath", value: "/bond" })
                           )
                         }
                       >
                         Bond
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                 </table>
@@ -281,7 +385,7 @@ const Bond = ({ theme }) => {
                             Get Asset
                             <Link to="" className="primary-color">
                               {" "}
-                              <FaExternalLinkAlt />{" "}
+                              <img src={Export}></img>{" "}
                             </Link>
                           </b>
                         </p>
@@ -332,7 +436,7 @@ const Bond = ({ theme }) => {
                             Get Asset
                             <Link to="" className="primary-color">
                               {" "}
-                              <FaExternalLinkAlt />{" "}
+                              <img src={Export}></img>{" "}
                             </Link>
                           </b>
                         </p>
@@ -354,32 +458,39 @@ const Bond = ({ theme }) => {
                         <p className="text-white m-0">USDC</p>
                       </div>
                     </div>
-                    <button
+                    <Link
                       className="bond_table_btn"
-                      onClick={() =>
+                      to=""
+                      onClick={() => {
                         dispatch(
-                          setState({ name: "modalShowBond", value: true })
-                        )
-                      }
+                          setState({ name: "currentPath", value: "/bond" })
+                        );
+                      }}
                     >
                       Bond
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
             ) : (
-              <div>
+              <div
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  borderRadius: "0 0 6px 6px",
+                  padding: "1rem 0",
+                }}
+              >
                 <p className="text-center primary-color">
                   No active inverse bond
                 </p>
                 <br />
                 <br />
-                <p className="text-center primary-color">
-                  Important: Inverse bonds allow you to bond your BOC for
-                  teasury assets.
-                </p>
               </div>
             )}
+            <p className="m-4 text-center">
+              Important: Inverse bonds allow you to bond your BOC for teasury
+              assets.<br></br> Vesting time is 0 and payouts are instant.
+            </p>
           </div>
         </div>
         <br />
@@ -387,7 +498,7 @@ const Bond = ({ theme }) => {
         <br />
         <br />
         <br />
-        <Modal
+        {/* <Modal
           show={modalShowBond}
           onHide={() =>
             dispatch(setState({ name: "modalShowBond", value: false }))
@@ -512,15 +623,9 @@ const Bond = ({ theme }) => {
                 </h6>
                 <h6 className="text-danger">-2.87%</h6>
               </div>
-              <div style={{ maxWidth: "600px", margin: "auto" }}>
-                <p className="m-0 text-center">
-                  Important bonds allows you to bond your BOC for treasury
-                  assets. Vesting time is 0 and payouts are instant.
-                </p>
-              </div>
             </div>
           </Modal.Body>
-        </Modal>
+        </Modal> */}
       </div>
     </>
   );
