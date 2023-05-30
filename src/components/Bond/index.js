@@ -55,6 +55,7 @@ const Bond = ({ theme }) => {
                   </h3>
                 )}
               </div>
+              <br></br>
               <div className="card_box col-12 col-md-4 bond_price_card">
                 <p className="card_title">
                   {" "}
@@ -91,10 +92,9 @@ const Bond = ({ theme }) => {
                   backgroundColor: "var(--blue)",
                   borderRadius: "10px",
                   color: "#fff",
-                  padding: "0 1rem",
+                  padding: "0.2rem 1rem",
                   display: "flex",
                   alignItems: "center",
-                  height: "1.4rem",
                 }}
               >
                 Coming Soon

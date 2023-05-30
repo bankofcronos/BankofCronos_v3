@@ -266,7 +266,7 @@ const Loan = ({
     <>
       <div style={{ marginBottom: 100 }} className="container loans">
         <br /> <br /> <br /> <br />
-        <div className="d-flex justify-content-between align-items-center">
+        {/* <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center gap-2"></div>
           <button
             className="hide-desktop my-2 p-2 rounded"
@@ -276,7 +276,7 @@ const Loan = ({
           >
             <AiFillInfoCircle style={{ fontSize: "30px" }} />
           </button>
-        </div>
+        </div> */}
         <Row>
           <Col sm={12} md={7}>
             <div className="card_container">
@@ -1192,6 +1192,8 @@ const Loan = ({
                   )}
                 </div>
               </div>
+              {/* <br /> */}
+              {/* <br />
               <br />
               <br />
               <br />
@@ -1203,21 +1205,20 @@ const Loan = ({
               <br />
               <br />
               <br />
-              <br />
-              <br />
-              <br />
+              <br /> */}
             </div>
           </Col>
           <Col sm={12} md={5}>
             <div
               style={{ marginBottom: 100 }}
-              className={
-                windowWidth < 900
-                  ? showStatboard
-                    ? "liquidy_card"
-                    : "liquidy_card d-none"
-                  : "liquidy_card"
-              }
+              // className={
+              //   windowWidth < 900
+              //     ? showStatboard
+              //       ? "liquidy_card"
+              //       : "liquidy_card d-none"
+              //     : "liquidy_card"
+              // }
+              className="liquidy_card"
             >
               <div className="d-flex gap-2 align-items-center justify-content-between">
                 <div>
@@ -1228,7 +1229,7 @@ const Loan = ({
                   </span>
                   <br></br>
                 </div>
-                <div>
+                {/* <div>
                   {windowWidth < 900 ? (
                     <button
                       style={{ fontSize: 30 }}
@@ -1242,7 +1243,7 @@ const Loan = ({
                       x
                     </button>
                   ) : null}
-                </div>
+                </div> */}
               </div>
               <div style={{ marginTop: 20 }} className="hide-desktop">
                 <p

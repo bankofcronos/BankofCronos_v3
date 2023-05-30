@@ -255,7 +255,7 @@ code {
   color: var(--text-primary);
   /* background: linear-gradient(200deg, rgb(212, 217, 252), rgb(202, 233, 249)); */
   padding: 10px;
-  box-shadow: rgb(41 49 71 / 10%) 0px 8px 16px;
+  /* box-shadow: rgb(41 49 71 / 10%) 0px 8px 16px; */
   border-radius: 8px;
 }
 
@@ -302,14 +302,17 @@ code {
 
 @media screen and (max-width: 900px) {
   .liquidy_card {
-    position: absolute;
+    /* position: absolute;
     left: 0;
     right: 0;
-    top: 80px;
+    top: 80px; */
     text-align: center;
     max-width: 600px;
-    margin-left: 3%;
-    margin-right: 3%;
+    /* margin-left: 3%;
+    margin-right: 3%; */
+  }
+  html {
+    font-size: 14px;
   }
 }
 
@@ -736,7 +739,7 @@ td {
 }
 
 .dark {
-  background-color: #090d18;
+  background-color: #21272e;
   color: #fff;
 }
 
@@ -744,8 +747,16 @@ td {
   background-color: rgb(66, 66, 66);
 }
 
-.light {
-  background-color: #fff;
+.connect_modal {
+  padding: 2rem;
+}
+
+.agree_checkbox {
+  border: none;
+  accent-color: var(--blue);
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 1rem;
 }
 
 .side_drawer .connect_wallet_btn {
@@ -817,20 +828,20 @@ td {
   padding: 20px;
   text-align: center;
   border-radius: 10px;
+  background-color: #000;
 }
 
 .wallet_card:hover {
-  background-color: #e0e2e3;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .wallet_card .wallet_name {
-  font-weight: bold;
-  font-size: 30px;
+  color: #fff;
+  margin-top: 0.9rem;
 }
 
-.wallet_card .wallet_description {
-  font-weight: 500;
-  color: rgb(148, 147, 147);
+.disconnect_button {
+  background-color: transparent;
 }
 
 .side_drawer_card {

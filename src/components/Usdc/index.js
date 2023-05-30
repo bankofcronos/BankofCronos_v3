@@ -34,29 +34,12 @@ const BocUsdcLp = ({
           <div className="main_card">
             <div className="bond_container">
               <div className="d-flex justify-content-between">
-                {/* <button
-                  className="modal_header_btn"
-                  onClick={() =>
-                    dispatch(setState({ name: "bondModal2", value: false }))
-                  }
-                >
-                  <AiOutlineClose />
-                </button> */}
                 <div className="d-flex align-items-center gap-2">
-                  {/* <img
-                    src="https://bankofcronos.com/wp-content/uploads/2022/02/LPUSD.png"
-                    width="40px"
-                    className=""
-                    alt=""
-                  /> */}
                   <Link to="/bond">
                     <img src={leftArrow}></img>
                   </Link>
                   <h4 style={{ color: "#fff" }}>USDC</h4>
                 </div>
-                {/* <button className="modal_header_btn">
-                  <AiOutlineSetting />
-                </button> */}
               </div>
 
               <br></br>
@@ -104,25 +87,11 @@ const BocUsdcLp = ({
                 </div>
               </div>
               <br />
+              <br />
               {isConnected ? (
                 <div>
-                  {/* <div>
-                    <p className="m-0 text-center">
-                      <i>
-                        First time purchasing
-                        <b className="px-1">BOC/USDC LP</b> bonds?
-                      </i>
-                    </p>
-                    <p className="m-0 text-center">
-                      <i>
-                        Please approve Bank Of Cronos to use your
-                        <b className="px-1">BOC/USDC LP</b>
-                        for bonds.
-                      </i>
-                    </p>
-                  </div> */}
                   <Row>
-                    {/* <Col lg="6">
+                    <Col lg="6">
                       <div className="loan_card_input_box">
                         <div className="stake_card_input">
                           <div className="stake_token">
@@ -152,15 +121,6 @@ const BocUsdcLp = ({
                         </div>
                         <div className="d-flex gap-1 stake-input">
                           <input
-                            // value={stakeamount}
-                            // onChange={(val) =>
-                            //   dispatch(
-                            //     setState({
-                            //       name: "stakeamount",
-                            //       value: val.target.value,
-                            //     })
-                            //   )
-                            // }
                             type="number"
                             placeholder="0.0000"
                             style={{
@@ -177,8 +137,8 @@ const BocUsdcLp = ({
                           <span>BOC</span>
                         </div>
                       </div>
-                    </Col> */}
-                    {/* <Col lg="6">
+                    </Col>
+                    <Col lg="6">
                       <div className="loan_card_input_box">
                         <div className="stake_card_input">
                           <div className="stake_token">
@@ -202,23 +162,9 @@ const BocUsdcLp = ({
                               }}
                             ></img>
                           </div>
-                          <div className="exc">
-                            <img src={arrow2} />
-                          </div>
                         </div>
                         <div className="d-flex gap-1 stake-input">
-                          <input
-                            value={stakeamount}
-                            onChange={(val) =>
-                              dispatch(
-                                setState({
-                                  name: "stakeamount",
-                                  value: val.target.value,
-                                })
-                              )
-                            }
-                            type="number"
-                            placeholder="0.0000"
+                          <div
                             style={{
                               width: "100%",
                               paddingLeft: 10,
@@ -229,22 +175,16 @@ const BocUsdcLp = ({
                               fontWeight: "600",
                               color: "#fff",
                             }}
-                          />
-                          <span>BOC</span>
+                          >
+                            {/* calcualted value */}
+                            0.0000
+                          </div>
                         </div>
                       </div>
-                    </Col> */}
+                    </Col>
                   </Row>
                   <div style={{ maxWidth: "500px", margin: "0 auto" }}>
-                    {/* <div className="d-flex gap-1 stake-input">
-                      <input
-                        type="number"
-                        placeholder="0"
-                        style={{ width: "100%" }}
-                      />
-
-                      <button className="max-btn">BOC</button>
-                    </div> */}
+                    <br />
                     <br />
                     <div className="d-flex justify-content-around gap-2">
                       <div>
@@ -315,12 +255,6 @@ const BocUsdcLp = ({
                     %
                   </h6>
                 </div>
-                {/* <div style={{ maxWidth: "600px", margin: "auto" }}>
-                  <p className="m-0 text-center">
-                    Inverse bonds allows you to bond your BOC for treasury
-                    assets. Vesting time is 0 and payouts are instant.
-                  </p>
-                </div> */}
               </div>
             </div>
           </div>

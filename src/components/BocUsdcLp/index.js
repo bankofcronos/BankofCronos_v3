@@ -161,15 +161,6 @@ const BocUsdcLp = ({
                         </div>
                         <div className="d-flex gap-1 stake-input">
                           <input
-                            // value={stakeamount}
-                            // onChange={(val) =>
-                            //   dispatch(
-                            //     setState({
-                            //       name: "stakeamount",
-                            //       value: val.target.value,
-                            //     })
-                            //   )
-                            // }
                             type="number"
                             placeholder="0.0000"
                             style={{
@@ -216,18 +207,7 @@ const BocUsdcLp = ({
                           </div> */}
                         </div>
                         <div className="d-flex gap-1 stake-input">
-                          <input
-                            // value={stakeamount}
-                            // onChange={(val) =>
-                            //   dispatch(
-                            //     setState({
-                            //       name: "stakeamount",
-                            //       value: val.target.value,
-                            //     })
-                            //   )
-                            // }
-                            type="number"
-                            placeholder="0.0000"
+                          <div
                             style={{
                               width: "100%",
                               paddingLeft: 10,
@@ -238,7 +218,10 @@ const BocUsdcLp = ({
                               fontWeight: "600",
                               color: "#fff",
                             }}
-                          />
+                          >
+                            {/* calcualted value */}
+                            0.0000
+                          </div>
                           {/* <span>BOC</span> */}
                         </div>
                       </div>

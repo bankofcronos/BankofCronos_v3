@@ -154,6 +154,7 @@ import {
   CUSDLPAddress,
 } from "./utils";
 import { setState, selectState } from "./features/state/stateSlice";
+import close from "./assets/close.svg";
 
 function sleep(milliseconds) {
   const date = Date.now();
@@ -2868,6 +2869,7 @@ export default function App() {
             isConnected={isConnected}
             isScrolling={isScrolling}
             theme={theme}
+            getBaseInfo={getBaseInfo}
           />
 
           <div onScroll={handleScroll} className="main_container">
@@ -3288,7 +3290,7 @@ export default function App() {
             </Modal.Body>
           </Modal> */}
 
-          <Modal
+          {/* <Modal
             show={bondModal2}
             onHide={() =>
               dispatch(setState({ name: "bondModal2", value: false }))
@@ -3457,7 +3459,7 @@ export default function App() {
                 </div>
               </div>
             </Modal.Body>
-          </Modal>
+          </Modal> */}
 
           <ToastContainer
             position="top-center"
@@ -3479,45 +3481,89 @@ export default function App() {
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >
-            <Modal.Body>
-              <div>
+            <Modal.Body className="connect_modal dark">
+              <div style={{ padding: "1.5rem" }}>
+                <Row style={{ alignItems: "center" }}>
+                  <Col
+                    md="11"
+                    style={{ fontSize: "1.1rem", fontWeight: "600" }}
+                  >
+                    Connect Wallet
+                  </Col>
+                  <Col md="1" style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+                    <img src={close}></img>
+                  </Col>
+                </Row>
+                <br></br>
+                <Row style={{ alignItems: "center" }}>
+                  <Col
+                    md="12"
+                    style={{
+                      fontSize: "1rem",
+                      padding: "1rem",
+                      border: "1px solid rgba(255, 255, 255, 0.3)",
+                      borderRadius: "6px",
+                    }}
+                  >
+                    <input
+                      onClick={() =>
+                        dispatch(
+                          setState({
+                            name: "isAgreeToTermsPolicy",
+                            value: !isAgreeToTermsPolicy,
+                          })
+                        )
+                      }
+                      type="checkbox"
+                      name="myCheckbox"
+                      className="agree_checkbox"
+                      checked={isAgreeToTermsPolicy}
+                    />
+                    <span>
+                      I have read and accept Terms of Service and Privacy
+                      Notice.
+                    </span>
+                  </Col>
+                </Row>
+                <br></br>
                 <Row>
-                  <Col sm="12" md="6">
+                  <Col sm="6" md="3">
                     <div
                       className="wallet_card"
                       onClick={() => {
-                        GetBalances_BOC();
+                        if (isAgreeToTermsPolicy) {
+                          GetBalances_BOC();
+                        }
                       }}
                       type="button"
+                      style={isAgreeToTermsPolicy ? {} : { opacity: "0.1" }}
                     >
                       <img
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png"
                         alt=""
                         width="50px"
+                        style={{ backgroundColor: "#fff", borderRadius: "50%" }}
                       />
-                      <p className="m-0 wallet_name">MetaMask</p>
-                      <p className="m-0 wallet_description">
-                        Connect to your MetaMask Wallet
-                      </p>
+                      <p className="wallet_name">MetaMask</p>
                     </div>
                   </Col>
-                  <Col sm="12" md="6">
+                  <Col sm="6" md="3">
                     <div
                       className="wallet_card"
                       onClick={() => {
-                        GetBalances_BOC_WC();
+                        if (isAgreeToTermsPolicy) {
+                          GetBalances_BOC_WC();
+                        }
                       }}
                       type="button"
+                      style={isAgreeToTermsPolicy ? {} : { opacity: "0.1" }}
                     >
                       <img
                         src="https://seeklogo.com/images/W/walletconnect-logo-EE83B50C97-seeklogo.com.png"
                         alt=""
                         width="50px"
                       />
-                      <p className="m-0 wallet_name">WalletConnect</p>
-                      <p className="m-0 wallet_description">
-                        Scan with WalletConnect to connect
-                      </p>
+                      <p className="wallet_name">WalletConnect</p>
                     </div>
                   </Col>
                 </Row>
