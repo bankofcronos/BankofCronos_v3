@@ -100,6 +100,11 @@ const initialState = {
   isScrolling: false,
   showAgreementModal: true,
   isAgreeToTermsPolicy: false,
+  txnGoing: false,
+  txnContent: {
+    status: "ongoing",
+    message: "",
+  },
 };
 
 export const stateSlice = createSlice({
@@ -109,7 +114,14 @@ export const stateSlice = createSlice({
   reducers: {
     setState: (state, action) => {
       state[action.payload.name] = action.payload.value;
-      if(action.payload.name == 'cusdprice'){ console.log("setting state: " + action.payload.name + " to : " + action.payload.value) }
+      if (action.payload.name == "cusdprice") {
+        console.log(
+          "setting state: " +
+            action.payload.name +
+            " to : " +
+            action.payload.value
+        );
+      }
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,

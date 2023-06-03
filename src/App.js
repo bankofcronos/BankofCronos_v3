@@ -155,6 +155,8 @@ import {
 } from "./utils";
 import { setState, selectState } from "./features/state/stateSlice";
 import close from "./assets/close.svg";
+import spinner from "./assets/Spinner-1s-200px (1).svg";
+import failed from "./assets/Group 109.svg";
 
 function sleep(milliseconds) {
   const date = Date.now();
@@ -259,6 +261,9 @@ export default function App() {
     isScrolling,
     showAgreementModal,
     isAgreeToTermsPolicy,
+    txnGoing,
+    txnContent,
+    txnFailed,
   } = state;
   const dispatch = useDispatch();
 
@@ -748,8 +753,16 @@ export default function App() {
     const chainId = await provider.getNetwork();
     if (chainId.chainId != "25") {
       console.log(chainId.chainId);
-      toast.info(
-        "Bank of Cronos is not supported on this network. Please connect to Cronos Mainnet"
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message:
+              "Bank of Cronos is not supported on this network. Please connect to Cronos Mainnet",
+          },
+        })
       );
     }
 
@@ -1726,8 +1739,16 @@ export default function App() {
       });
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
       if (chainId != "0x19") {
-        toast.info(
-          "Bank of Cronos is not supported on this network. Please connect to Cronos Mainnet"
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: {
+              status: "ongoing",
+              message:
+                "Bank of Cronos is not supported on this network. Please connect to Cronos Mainnet",
+            },
+          })
         );
         await window.ethereum.request(
           {
@@ -1766,7 +1787,13 @@ export default function App() {
       dispatch(setState({ name: "connectstep", value: "0" }));
       localStorage.setItem("connectstep", "0");
       localStorage.setItem("retries", 0.0);
-      toast.loading("Connecting...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: { status: "ongoing", message: "Connecting..." },
+        })
+      );
       // setaddress("Connecting.");
 
       dispatch(
@@ -1787,12 +1814,22 @@ export default function App() {
       );
       localStorage.setItem("isConnected", true);
       toast.dismiss();
-      toast.info("Connected!");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: { status: "ongoing", message: "Connected!" },
+        })
+      );
       dispatch(setState({ name: "isConnecting", value: false }));
     } catch (e) {
       console.log(e);
-      toast.dismiss();
-      toast.error("Defi Wallet Connect Failed");
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: { status: "failed", message: "Defi Wallet Connect Failed" },
+        })
+      );
       dispatch(setState({ name: "isConnecting", value: false }));
       // setIsConnected(false);
       dispatch(
@@ -1813,7 +1850,13 @@ export default function App() {
         dispatch(setState({ name: "connectstep", value: "0" }));
         localStorage.setItem("connectstep", "0");
         localStorage.setItem("retries", 0.0);
-        toast.loading("Connecting...");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "ongoing", message: "Connecting..." },
+          })
+        );
         // setaddress("Connecting.");
         dispatch(
           setState({
@@ -1832,13 +1875,23 @@ export default function App() {
         );
         localStorage.setItem("isConnected", true);
         toast.dismiss();
-        toast.info("Connected!");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "ongoing", message: "Connected!" },
+          })
+        );
         dispatch(setState({ name: "setIsConnecting", value: false }));
       }
     } catch (e) {
       console.log(e);
-      toast.dismiss();
-      toast.error("Connect Wallet Failed");
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: { status: "failed", message: "Connect Wallet Failed" },
+        })
+      );
       dispatch(setState({ name: "setIsConnecting", value: false }));
       // setIsConnected(false);
       dispatch(
@@ -1873,19 +1926,51 @@ export default function App() {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info(
-            "Staking Rebase Failed, Please Allow for BOC to be unstaked"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "Staking Rebase Failed, Please Allow for BOC to be unstaked",
+              },
+            })
           );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("Staking Rebase Failed, Insufficient BOC token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "Staking Rebase Failed, Insufficient BOC token balance",
+              },
+            })
+          );
         } else {
-          toast.info(
-            "Staking Rebase Failed, Please ensure BOC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "Staking Rebase Failed, Please ensure BOC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
         //console.log(e);
-        toast.info("Staking Rebase Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "Staking Rebase Failed" },
+          })
+        );
       }
     }
   }
@@ -1903,7 +1988,16 @@ export default function App() {
     const usdc = new ethers.Contract(USDCAddress, USDC.abi, signer);
     try {
       if (stakeamount <= 0) {
-        toast.info("BOC Staking Failed, BOC amount must be greater than 0");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: {
+              status: "ongoing",
+              message: "BOC Staking Failed, BOC amount must be greater than 0",
+            },
+          })
+        );
         return;
       }
       //console.log("Trying to stake: " + stakeamount)
@@ -1922,15 +2016,49 @@ export default function App() {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("Staking Failed, Please Allow for BOC to be unstaked");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message: "Staking Failed, Please Allow for BOC to be unstaked",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("Staking Failed, Insufficient BOC token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "Staking Failed, Insufficient BOC token balance",
+              },
+            })
+          );
         } else {
-          toast.info("Staking Failed, Please ensure BOC Balance is approved");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "Staking Failed, Please ensure BOC Balance is approved",
+              },
+            })
+          );
         }
       } catch (e) {
         //console.log(e);
-        toast.info("Staking Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "Staking Failed" },
+          })
+        );
       }
     }
   }
@@ -1948,7 +2076,17 @@ export default function App() {
     const usdc = new ethers.Contract(USDCAddress, USDC.abi, signer);
     try {
       if (stakeamount <= 0) {
-        toast.info("sBOC Unstaking Failed, sBOC amount must be greater than 0");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: {
+              status: "ongoing",
+              message:
+                "sBOC Unstaking Failed, sBOC amount must be greater than 0",
+            },
+          })
+        );
         return;
       }
       //console.log("Trying to unstake stake: " + stakeamount)
@@ -1957,22 +2095,65 @@ export default function App() {
       await staking.unstake(unstakeamt, false);
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("BOC unstaked successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: { status: "ongoing", message: "BOC unstaked successfully..." },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("Unstaking Failed, Please Allow for sBOC to be unstaked");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "Unstaking Failed, Please Allow for sBOC to be unstaked",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("Unstaking Failed, Insufficient sBOC token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "Unstaking Failed, Insufficient sBOC token balance",
+              },
+            })
+          );
         } else {
-          toast.info(
-            "Unstaking Failed, Please ensure sBOC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "Unstaking Failed, Please ensure sBOC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
         //console.log(e);
-        toast.info("Unstaking Failed, Please ensure sBOC Balance is approved");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: {
+              status: "failed",
+              message:
+                "Unstaking Failed, Please ensure sBOC Balance is approved",
+            },
+          })
+        );
       }
     }
   }
@@ -1992,7 +2173,16 @@ export default function App() {
     try {
       //**CHANGE** max approval
       // if (stakeamount <= 0) {
-      //   toast.info("BOC Approval Failed, BOC amount must be greater than 0");
+      dispatch(setState({ name: "txnGoing", value: true })); //
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "BOC Approval Failed, BOC amount must be greater than 0",
+          },
+        })
+      );
       //   return;
       // }
       //console.log("Trying to stake: " + stakeamount)
@@ -2002,21 +2192,59 @@ export default function App() {
       await boc.approve(StakingHelperAddress, 999999000000000);
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("BOC Approved successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: { status: "ongoing", message: "BOC Approved successfully..." },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("BOC Failed, Please Allow for BOC");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message: "BOC Failed, Please Allow for BOC",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("BOC Approval Failed, Insufficient sBOC token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "BOC Approval Failed, Insufficient sBOC token balance",
+              },
+            })
+          );
         } else {
-          toast.info(
-            "BOC Approval Failed, Please ensure BOC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "BOC Approval Failed, Please ensure BOC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
-        toast.info("BOC Approval Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "BOC Approval Failed" },
+          })
+        );
       }
     }
   }
@@ -2036,7 +2264,16 @@ export default function App() {
     try {
       //**CHANGE** - max staking approval
       // if (stakeamount <= 0) {
-      //   toast.info("sBOC Approval Failed, sBOC amount must be greater than 0");
+      dispatch(setState({ name: "txnGoing", value: true })); //
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "sBOC Approval Failed, sBOC amount must be greater than 0",
+          },
+        })
+      );
       //   return;
       // }
       //console.log("Trying to approve unstake: " + stakeamount)
@@ -2046,21 +2283,63 @@ export default function App() {
       await sBOC.approve(StakingAddress, 999999000000000);
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("sBOC Approved successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "sBOC Approved successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("sBOC Approval Failed, Please Allow for sBOC");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message: "sBOC Approval Failed, Please Allow for sBOC",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("sBOC Approval Failed, Insufficient sBOC token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "sBOC Approval Failed, Insufficient sBOC token balance",
+              },
+            })
+          );
         } else {
-          toast.info(
-            "sBOC Approval Failed, Please ensure BOC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "sBOC Approval Failed, Please ensure BOC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
-        toast.info("sBOC Approval Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "sBOC Approval Failed" },
+          })
+        );
       }
     }
   }
@@ -2083,23 +2362,63 @@ export default function App() {
       await usdc.approve(USDCBondAddress, "1000000000000");
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("USDC Bond Approved successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "USDC Bond Approved successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("USDC Bond Approval Failed, Please Allow for sBOC");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message: "USDC Bond Approval Failed, Please Allow for sBOC",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info(
-            "USDC Bond Approval Failed, Insufficient sBOC token balance"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "USDC Bond Approval Failed, Insufficient sBOC token balance",
+              },
+            })
           );
         } else {
-          toast.info(
-            "USDC Bond Approval Failed, Please ensure BOC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "USDC Bond Approval Failed, Please ensure BOC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
-        toast.info("USDC Bond Approval Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "USDC Bond Approval Failed" },
+          })
+        );
       }
     }
   }
@@ -2126,29 +2445,76 @@ export default function App() {
       );
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("USDC Bond Purchased successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "USDC Bond Purchased successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info(
-            "USDC Bond Purchase Failed, Please Allow for USDC first before Purchasing"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "USDC Bond Purchase Failed, Please Allow for USDC first before Purchasing",
+              },
+            })
           );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info(
-            "USDC Bond Purchase Failed, Insufficient USDC Token balance"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "USDC Bond Purchase Failed, Insufficient USDC Token balance",
+              },
+            })
           );
         } else if (e.data.message.toString().includes("Bond too small")) {
-          toast.info(
-            "USDC Bond Purchase Failed, Bond payout too small, please increase purchase"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "USDC Bond Purchase Failed, Bond payout too small, please increase purchase",
+              },
+            })
           );
         } else {
-          toast.info(
-            "USDC Bond Purchase Failed, Please ensure USDC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "USDC Bond Purchase Failed, Please ensure USDC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
-        toast.info("USDC Bond Purchase Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "USDC Bond Purchase Failed" },
+          })
+        );
       }
     }
   }
@@ -2174,23 +2540,77 @@ export default function App() {
 
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("USDC Bond Redeemed successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "USDC Bond Redeemed successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("USDC Bond Redemption Failed.");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "USDC Bond Redemption Failed.",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("USDC Bond Redemption Failed, Insufficient Token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "falied",
+                message:
+                  "USDC Bond Redemption Failed, Insufficient Token balance",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("Bond too small")) {
-          toast.info(
-            "USDC Bond Redemption Failed, Bond payout too small, please increase purchase"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "USDC Bond Redemption Failed, Bond payout too small, please increase purchase",
+              },
+            })
           );
         } else {
-          toast.info("USDC Bond Redemption Failed.");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "USDC Bond Redemption Failed.",
+              },
+            })
+          );
         }
       } catch (e) {
-        toast.info("USDC Bond Redemption Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: {
+              status: "failed",
+              message: "USDC Bond Redemption Failed",
+            },
+          })
+        );
       }
     }
   }
@@ -2214,23 +2634,60 @@ export default function App() {
       await cronaswaplp.approve(BOCLPBondAddress, "1000000000000");
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("LP Bond Approved successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "LP Bond Approved successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("LP Bond Approval Failed");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "LP Bond Approval Failed" },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info(
-            "LP Bond Approval Failed, Insufficient sBOC token balance"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "LP Bond Approval Failed, Insufficient sBOC token balance",
+              },
+            })
           );
         } else {
-          toast.info(
-            "LP Bond Approval Failed, Please ensure BOC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "LP Bond Approval Failed, Please ensure BOC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
-        toast.info("LP Bond Approval Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "LP Bond Approval Failed" },
+          })
+        );
       }
     }
   }
@@ -2245,29 +2702,76 @@ export default function App() {
       await lpbond.deposit(lpbondamount * 1000000, lp_bond_price, account);
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("LP Bond Purchased successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "LP Bond Purchased successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info(
-            "LP Bond Purchase Failed, Please Allow for LP first before Purchasing"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "LP Bond Purchase Failed, Please Allow for LP first before Purchasing",
+              },
+            })
           );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info(
-            "LP Bond Purchase Failed, Insufficient USDC Token balance"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "LP Bond Purchase Failed, Insufficient USDC Token balance",
+              },
+            })
           );
         } else if (e.data.message.toString().includes("Bond too small")) {
-          toast.info(
-            "LP Bond Purchase Failed, Bond payout too small, please increase purchase"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "LP Bond Purchase Failed, Bond payout too small, please increase purchase",
+              },
+            })
           );
         } else {
-          toast.info(
-            "LP Bond Purchase Failed, Please ensure USDC Balance is approved"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "ongoing",
+                message:
+                  "LP Bond Purchase Failed, Please ensure USDC Balance is approved",
+              },
+            })
           );
         }
       } catch (e) {
-        toast.info("LP Bond Purchase Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "LP Bond Purchase Failed" },
+          })
+        );
       }
     }
   }
@@ -2293,23 +2797,74 @@ export default function App() {
 
       //await sBOC.setIndex('1000');
       //await staking.rebase();
-      toast.info("LP Bond Redeemed successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "LP Bond Redeemed successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("LP Bond Redemption Failed.");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "LP Bond Redemption Failed.",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("LP Bond Redemption Failed, Insufficient Token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "LP Bond Redemption Failed, Insufficient Token balance",
+              },
+            })
+          );
         } else if (e.data.message.toString().includes("Bond too small")) {
-          toast.info(
-            "LP Bond Redemption Failed, Bond payout too small, please increase purchase"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "LP Bond Redemption Failed, Bond payout too small, please increase purchase",
+              },
+            })
           );
         } else {
-          toast.info("LP Bond Redemption Failed.");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "LP Bond Redemption Failed.",
+              },
+            })
+          );
         }
       } catch (e) {
-        toast.info("LP Bond Redemption Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "LP Bond Redemption Failed" },
+          })
+        );
       }
     }
   }
@@ -2511,27 +3066,64 @@ export default function App() {
       const txReceipt = await tx.wait();
       console.log("Transaction Receipt:", txReceipt);
       await retry(10, connectapp_loans, provider, connection, signer, account);
-      toast.info(
-        "Loan Opened Successfully: <a href='https://cronoscan.com/tx/" +
-          tx.hash +
-          "'>View on Cronoscan</a>"
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message:
+              "Loan Opened Successfully: <a href='https://cronoscan.com/tx/" +
+              tx.hash +
+              "'>View on Cronoscan</a>",
+          },
+        })
       );
     } catch (e) {
       console.log(e);
       try {
         if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("Loan opening Failed, Insufficient Token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "Loan opening Failed, Insufficient Token balance",
+              },
+            })
+          );
         } else if (
           e.data.message.toString().includes("insufficient-approval")
         ) {
-          toast.info(
-            "Loan opening Failed, Approve required for tokens to be used by BOC Loans Borrower Operations Contract"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "Loan opening Failed, Approve required for tokens to be used by BOC Loans Borrower Operations Contract",
+              },
+            })
           );
         } else {
-          toast.info("Loan opening Failed.");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "Loan opening Failed." },
+            })
+          );
         }
       } catch (e) {
-        toast.info("Loan opening Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "Loan opening Failed" },
+          })
+        );
       }
     }
   }
@@ -2612,29 +3204,72 @@ export default function App() {
       //await sBOC.setIndex('1000');
       //await staking.rebase();
       await retry(10, connectapp_loans, provider, connection, signer, account);
-      toast.info(
-        "Loan Adjusted Successfully: <a href='https://cronoscan.com/tx/" +
-          tx.hash +
-          "'>View on Cronoscan</a>"
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message:
+              "Loan Adjusted Successfully: <a href='https://cronoscan.com/tx/" +
+              tx.hash +
+              "'>View on Cronoscan</a>",
+          },
+        })
       );
     } catch (e) {
       console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("Loan Adjustment Failed.");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "Loan Adjustment Failed." },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("Loan Adjustment Failed, Insufficient Token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "Loan Adjustment Failed, Insufficient Token balance",
+              },
+            })
+          );
         } else if (
           e.data.message.toString().includes("insufficient-approval")
         ) {
-          toast.info(
-            "Loan Adjustment Failed, Approve required for tokens to be used by BOC Loans Borrower Operations Contract"
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message:
+                  "Loan Adjustment Failed, Approve required for tokens to be used by BOC Loans Borrower Operations Contract",
+              },
+            })
           );
         } else {
-          toast.info("Loan Adjustment Failed.");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "Loan Adjustment Failed." },
+            })
+          );
         }
       } catch (e) {
-        toast.info("Loan Adjustment Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "Loan Adjustment Failed" },
+          })
+        );
       }
     }
   }
@@ -2686,19 +3321,55 @@ export default function App() {
         borrowerOperationsAddress,
         (amount * 1000000000000000000).toString()
       );
-      toast.info("WCRO Approval successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "WCRO Approval successfully...",
+          },
+        })
+      );
     } catch (e) {
       console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("WCRO Approval Failed");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "WCRO Approval Failed" },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("WCRO Approval Failed, Insufficient token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "WCRO Approval Failed, Insufficient token balance",
+              },
+            })
+          );
         } else {
-          toast.info("WCRO Approval Failed");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "WCRO Approval Failed" },
+            })
+          );
         }
       } catch (e) {
-        toast.info("WCRO Approval Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "WCRO Approval Failed" },
+          })
+        );
       }
     }
   }
@@ -2724,19 +3395,55 @@ export default function App() {
         borrowerOperationsAddress,
         (amount * 1000000000000000000).toString()
       );
-      toast.info("WETH Approval successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "WETH Approval successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("WETH Approval Failed");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "WETH Approval Failed" },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("WETH Approval Failed, Insufficient token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "WETH Approval Failed, Insufficient token balance",
+              },
+            })
+          );
         } else {
-          toast.info("WETH Approval Failed");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "WETH Approval Failed" },
+            })
+          );
         }
       } catch (e) {
-        toast.info("WETH Approval Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "WETH Approval Failed" },
+          })
+        );
       }
     }
   }
@@ -2762,19 +3469,55 @@ export default function App() {
         borrowerOperationsAddress,
         (amount * 1000000000000000000).toString()
       );
-      toast.info("WBTC Approval successfully...");
+      dispatch(setState({ name: "txnGoing", value: true }));
+      dispatch(
+        setState({
+          name: "txnContent",
+          value: {
+            status: "ongoing",
+            message: "WBTC Approval successfully...",
+          },
+        })
+      );
     } catch (e) {
       //console.log(e);
       try {
         if (e.data.message.toString().includes("exceeds allowance")) {
-          toast.info("WBTC Approval Failed");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "WBTC Approval Failed" },
+            })
+          );
         } else if (e.data.message.toString().includes("insufficient-balance")) {
-          toast.info("WBTC Approval Failed, Insufficient token balance");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: {
+                status: "failed",
+                message: "WBTC Approval Failed, Insufficient token balance",
+              },
+            })
+          );
         } else {
-          toast.info("WBTC Approval Failed");
+          dispatch(setState({ name: "txnGoing", value: true }));
+          dispatch(
+            setState({
+              name: "txnContent",
+              value: { status: "failed", message: "WBTC Approval Failed" },
+            })
+          );
         }
       } catch (e) {
-        toast.info("WBTC Approval Failed");
+        dispatch(setState({ name: "txnGoing", value: true }));
+        dispatch(
+          setState({
+            name: "txnContent",
+            value: { status: "failed", message: "WBTC Approval Failed" },
+          })
+        );
       }
     }
   }
@@ -2846,31 +3589,9 @@ export default function App() {
           className="sidebar_layout"
           data-theme={theme}
         >
-          <SideBar
-            toggleSideBar={toggleSideBar}
-            openSideBar={openSideBar}
-            windowWidth={windowWidth}
-            theme={theme}
-            isConnected={isConnected}
-            address={address}
-            currentPath={currentPath}
-            showBond={showBond}
-            isConnecting={isConnecting}
-            bocbondprice={bocbondprice}
-            bocprice={bocprice}
-            cusdprice={cusdprice}
-            lpbocbondprice={lpbocbondprice}
-            lpbocprice={lpbocprice}
-          />
+          <SideBar toggleSideBar={toggleSideBar} />
 
-          <TopBar
-            switchTheme={switchTheme}
-            address={address}
-            isConnected={isConnected}
-            isScrolling={isScrolling}
-            theme={theme}
-            getBaseInfo={getBaseInfo}
-          />
+          <TopBar switchTheme={switchTheme} getBaseInfo={getBaseInfo} />
 
           <div onScroll={handleScroll} className="main_container">
             <Switch>
@@ -2885,18 +3606,7 @@ export default function App() {
                 />
               </Route> */}
               <Route path="/bond">
-                <Bond
-                  isConnected={isConnected}
-                  isConnecting={isConnecting}
-                  treasurybalance={treasurybalance}
-                  bocprice={bocprice}
-                  cusdprice={cusdprice}
-                  bocbondprice={bocbondprice}
-                  lpbocbondprice={lpbocbondprice}
-                  lpbocprice={lpbocprice}
-                  modalShowBond={modalShowBond}
-                  theme={theme}
-                />
+                <Bond />
               </Route>
               <Route path="/bocusdclp">
                 <BocUsdcLp
@@ -2912,81 +3622,26 @@ export default function App() {
 
               <Route exact path="/">
                 <Loan
-                  windowWidth={windowWidth}
-                  crobalance={crobalance}
-                  wcrobalance={wcrobalance}
-                  WCROAddress={WCROAddress}
-                  WBTCAddress={WBTCAddress}
-                  wethbalance={wethbalance}
-                  bocbalance={bocbalance}
-                  bocprice={bocprice}
-                  cusdprice={cusdprice}
-                  cusdbalance={cusdbalance}
-                  CUSDAddress={CUSDAddress}
-                  BOCAddress={BOCAddress}
-                  openLoanCard={openLoanCard}
-                  openPoll={openPoll}
-                  newtrovebtccol={newtrovebtccol}
-                  trovebtccolapproved={trovebtccolapproved}
-                  newtrovedebt={newtrovedebt}
-                  newtrovecrocol={newtrovecrocol}
-                  protocolrecoverythreshold={protocolrecoverythreshold}
-                  protocoltcr={protocoltcr}
-                  protocolisrecovery={protocolisrecovery}
-                  protocolcusdsupply={protocolcusdsupply}
-                  spdeposits={spdeposits}
-                  protocoltvl={protocoltvl}
-                  protocoltrovecount={protocoltrovecount}
-                  ethpricefeed={ethpricefeed}
-                  btcpricefeed={btcpricefeed}
-                  showStatboard={showStatboard}
-                  trovedebt={trovedebt}
-                  trovebtccol={trovebtccol}
-                  troveethcol={troveethcol}
-                  trovecrocolapproved={trovecrocolapproved}
-                  trovecrocol={trovecrocol}
                   approve_wcro_BO={approve_wcro_BO}
-                  newtroveethcol={newtroveethcol}
-                  troveethcolapproved={troveethcolapproved}
                   approve_weth_BO={approve_weth_BO}
                   approve_wbtc_BO={approve_wbtc_BO}
-                  cropricefeed={cropricefeed}
-                  istroveactive={istroveactive}
-                  borrowerOperationsAddress={borrowerOperationsAddress}
                   adjustloan={adjustloan}
-                  wbtcbalance={wbtcbalance}
-                  WETHAddress={WETHAddress}
-                  address={address}
                   connect_Metamask={connect_Metamask}
-                  isConnected={isConnected}
                 />
               </Route>
               <Route path="/stake">
                 <Stake
-                  isConnecting={isConnecting}
-                  rebasetime={rebasetime}
                   rebase_BOC={rebase_BOC}
-                  reward={reward}
-                  circsupply={circsupply}
-                  treasurybalance={treasurybalance}
-                  index={index}
-                  isConnected={isConnected}
-                  isStake={isStake}
                   approve_stake_BOC={approve_stake_BOC}
                   approve_unstake_BOC={approve_unstake_BOC}
-                  loader={loader}
-                  stakeamount={stakeamount}
-                  bocbalance={bocbalance}
-                  sbocbalance={sbocbalance}
                   stake_BOC={stake_BOC}
                   unstake_BOC={unstake_BOC}
-                  showTotal={showTotal}
                 />
               </Route>
             </Switch>
           </div>
 
-          <Drawer
+          {/* <Drawer
             open={open}
             onClose={() => dispatch(setState({ name: "open", value: false }))}
           >
@@ -3183,7 +3838,7 @@ export default function App() {
                 </div>
               </div>
             </Drawer.Body>
-          </Drawer>
+          </Drawer> */}
 
           {/* agreement modal */}
           {/* <Modal
@@ -3491,7 +4146,12 @@ export default function App() {
                     Connect Wallet
                   </Col>
                   <Col md="1" style={{ fontSize: "1.5rem", fontWeight: "400" }}>
-                    <img src={close}></img>
+                    <img
+                      src={close}
+                      onClick={() => {
+                        dispatch(setState({ name: "txnGoing", value: false }));
+                      }}
+                    ></img>
                   </Col>
                 </Row>
                 <br></br>
@@ -3520,7 +4180,7 @@ export default function App() {
                       checked={isAgreeToTermsPolicy}
                     />
                     <span>
-                      I have read and accept Terms of Service and Privacy
+                      Modal I have read and accept Terms of Service and Privacy
                       Notice.
                     </span>
                   </Col>
@@ -3567,6 +4227,114 @@ export default function App() {
                     </div>
                   </Col>
                 </Row>
+              </div>
+            </Modal.Body>
+          </Modal>
+          <Modal
+            show={txnGoing}
+            onHide={() =>
+              dispatch(setState({ name: "txnGoing", value: false }))
+            }
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Body className="connect_modal dark">
+              <div style={{ padding: "1.5rem" }}>
+                <Row style={{ alignItems: "center" }}>
+                  <Col
+                    md="12"
+                    style={{
+                      fontSize: "1.1rem",
+                      fontWeight: "600",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {txnContent.status === "ongoing" ? (
+                      <img src={spinner} className="spinner"></img>
+                    ) : txnContent.status === "failed" ? (
+                      <img src={failed} className="spinner"></img>
+                    ) : (
+                      ""
+                    )}
+                  </Col>
+                </Row>
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "400",
+                    display: "flex",
+                    alignItems: "baseline",
+                    position: "absolute",
+                    top: "1rem",
+                    right: "1rem",
+                  }}
+                >
+                  <img
+                    src={close}
+                    onClick={() => {
+                      dispatch(setState({ name: "txnGoing", value: false }));
+                    }}
+                  ></img>
+                </div>
+                <br></br>
+                <Row style={{ alignItems: "center" }}>
+                  <Col
+                    md="12"
+                    style={{
+                      fontSize: "1.2rem",
+                      fontWeight: "bold",
+                      padding: "1rem",
+                      borderRadius: "6px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {txnContent.message}
+                  </Col>
+                </Row>
+                <br></br>
+                {/* <Row>
+                  <Col sm="6" md="3">
+                    <div
+                      className="wallet_card"
+                      onClick={() => {
+                        if (isAgreeToTermsPolicy) {
+                          GetBalances_BOC();
+                        }
+                      }}
+                      type="button"
+                      style={isAgreeToTermsPolicy ? {} : { opacity: "0.1" }}
+                    >
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png"
+                        alt=""
+                        width="50px"
+                        style={{ backgroundColor: "#fff", borderRadius: "50%" }}
+                      />
+                      <p className="wallet_name">MetaMask</p>
+                    </div>
+                  </Col>
+                  <Col sm="6" md="3">
+                    <div
+                      className="wallet_card"
+                      onClick={() => {
+                        if (isAgreeToTermsPolicy) {
+                          GetBalances_BOC_WC();
+                        }
+                      }}
+                      type="button"
+                      style={isAgreeToTermsPolicy ? {} : { opacity: "0.1" }}
+                    >
+                      <img
+                        src="https://seeklogo.com/images/W/walletconnect-logo-EE83B50C97-seeklogo.com.png"
+                        alt=""
+                        width="50px"
+                      />
+                      <p className="wallet_name">WalletConnect</p>
+                    </div>
+                  </Col>
+                </Row> */}
               </div>
             </Modal.Body>
           </Modal>
