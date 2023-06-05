@@ -676,6 +676,21 @@ td {
   align-items: center;
 }
 
+.top_bar .top_bar_btn .user_info_mobile {
+  display: none;
+  font-size: 1rem;
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  background-color: var(--background);
+  border-radius: 6px;
+  color: rgb(87, 87, 87);
+}
+
+.top_bar .user_info_mobile .user_info {
+  padding: 0;
+}
+
 .top_bar .top_bar_btn {
   padding: 0px 15px;
   height: 40px;
@@ -695,6 +710,10 @@ td {
 .top_bar .top_bar_btn:hover {
   background: rgba(69, 144, 240, 0.3);
   color: #2874da;
+}
+
+.top_bar .top_bar_btn:hover .user_info_mobile {
+  display: block;
 }
 
 .sidebar_toggle_btn {

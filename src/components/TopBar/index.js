@@ -117,6 +117,69 @@ const TopBar = ({ switchTheme, theme, getBaseInfo }) => {
               >
                 <img src={connectedWallet}></img>
                 <span>Connected</span>
+                {windowWidth < 900 && (
+                  <div className="user_info_mobile">
+                    <div className="user_info" style={{ padding: "0" }}>
+                      <img src={emptyWallet1}></img>
+                      <div style={{ width: "40px", fontWeight: "bold" }}>
+                        <div style={{ fontSize: "1rem" }}>CRO</div>
+                        <div>
+                          {(Math.round(crobalance * 1000) / 1000).toFixed(2)}
+                        </div>
+                      </div>
+                      <div style={{ width: "40px", fontWeight: "bold" }}>
+                        <div style={{ fontSize: "1rem" }}>WCRO</div>
+                        <div>
+                          {(Math.round(wcrobalance * 1000) / 1000).toFixed(2)}
+                        </div>
+                      </div>
+                      <div style={{ width: "40px", fontWeight: "bold" }}>
+                        <div style={{ fontSize: "1rem" }}>CUSD</div>
+                        <div>
+                          {(Math.round(cusdbalance * 1000) / 1000).toFixed(2)}
+                        </div>
+                      </div>
+                      <div style={{ width: "40px", fontWeight: "bold" }}>
+                        <div style={{ fontSize: "1rem" }}>BOC</div>
+                        <div>
+                          {(Math.round(bocbalance * 1000) / 1000).toFixed(2)}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="user_info">
+                      <img src={user}></img>
+                      <div style={{ width: "120px", fontWeight: "bold" }}>
+                        <div style={{ fontSize: "1rem" }}>Connected as</div>
+                        <div>
+                          {address}{" "}
+                          <button
+                            className="disconnect_button"
+                            title="Disconnect"
+                            onClick={() => {
+                              localStorage.removeItem("isConnected");
+                              dispatch(
+                                setState({
+                                  name: "isConnected",
+                                  value: false,
+                                })
+                              );
+                              dispatch(
+                                setState({ name: "openLoanCard", value: false })
+                              );
+                              const fun = async () => {
+                                await getBaseInfo();
+                              };
+                              fun();
+                              localStorage.setItem("OpenLoanCard", false);
+                            }}
+                          >
+                            <img src={cancel} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </button>
             </>
           ) : (

@@ -157,6 +157,7 @@ import { setState, selectState } from "./features/state/stateSlice";
 import close from "./assets/close.svg";
 import spinner from "./assets/Spinner-1s-200px (1).svg";
 import failed from "./assets/Group 109.svg";
+import success from "./assets/success.png";
 
 function sleep(milliseconds) {
   const date = Date.now();
@@ -1818,7 +1819,7 @@ export default function App() {
       dispatch(
         setState({
           name: "txnContent",
-          value: { status: "ongoing", message: "Connected!" },
+          value: { status: "success", message: "Connected!" },
         })
       );
       dispatch(setState({ name: "isConnecting", value: false }));
@@ -1879,7 +1880,7 @@ export default function App() {
         dispatch(
           setState({
             name: "txnContent",
-            value: { status: "ongoing", message: "Connected!" },
+            value: { status: "success", message: "Connected!" },
           })
         );
         dispatch(setState({ name: "setIsConnecting", value: false }));
@@ -1993,7 +1994,7 @@ export default function App() {
           setState({
             name: "txnContent",
             value: {
-              status: "ongoing",
+              status: "failed",
               message: "BOC Staking Failed, BOC amount must be greater than 0",
             },
           })
@@ -2043,7 +2044,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message:
                   "Staking Failed, Please ensure BOC Balance is approved",
               },
@@ -2081,7 +2082,7 @@ export default function App() {
           setState({
             name: "txnContent",
             value: {
-              status: "ongoing",
+              status: "failed",
               message:
                 "sBOC Unstaking Failed, sBOC amount must be greater than 0",
             },
@@ -2099,7 +2100,7 @@ export default function App() {
       dispatch(
         setState({
           name: "txnContent",
-          value: { status: "ongoing", message: "BOC unstaked successfully..." },
+          value: { status: "success", message: "BOC unstaked successfully..." },
         })
       );
     } catch (e) {
@@ -2178,7 +2179,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "failed",
             message: "BOC Approval Failed, BOC amount must be greater than 0",
           },
         })
@@ -2196,7 +2197,7 @@ export default function App() {
       dispatch(
         setState({
           name: "txnContent",
-          value: { status: "ongoing", message: "BOC Approved successfully..." },
+          value: { status: "success", message: "BOC Approved successfully..." },
         })
       );
     } catch (e) {
@@ -2269,7 +2270,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "failed",
             message: "sBOC Approval Failed, sBOC amount must be greater than 0",
           },
         })
@@ -2288,7 +2289,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "sBOC Approved successfully...",
           },
         })
@@ -2302,7 +2303,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message: "sBOC Approval Failed, Please Allow for sBOC",
               },
             })
@@ -2367,7 +2368,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "USDC Bond Approved successfully...",
           },
         })
@@ -2381,7 +2382,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message: "USDC Bond Approval Failed, Please Allow for sBOC",
               },
             })
@@ -2450,7 +2451,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "USDC Bond Purchased successfully...",
           },
         })
@@ -2464,7 +2465,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message:
                   "USDC Bond Purchase Failed, Please Allow for USDC first before Purchasing",
               },
@@ -2545,7 +2546,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "USDC Bond Redeemed successfully...",
           },
         })
@@ -2639,7 +2640,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "LP Bond Approved successfully...",
           },
         })
@@ -2707,7 +2708,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "LP Bond Purchased successfully...",
           },
         })
@@ -2721,7 +2722,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message:
                   "LP Bond Purchase Failed, Please Allow for LP first before Purchasing",
               },
@@ -2733,7 +2734,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message:
                   "LP Bond Purchase Failed, Insufficient USDC Token balance",
               },
@@ -2745,7 +2746,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message:
                   "LP Bond Purchase Failed, Bond payout too small, please increase purchase",
               },
@@ -2757,7 +2758,7 @@ export default function App() {
             setState({
               name: "txnContent",
               value: {
-                status: "ongoing",
+                status: "failed",
                 message:
                   "LP Bond Purchase Failed, Please ensure USDC Balance is approved",
               },
@@ -2802,7 +2803,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "LP Bond Redeemed successfully...",
           },
         })
@@ -3071,7 +3072,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message:
               "Loan Opened Successfully: <a href='https://cronoscan.com/tx/" +
               tx.hash +
@@ -3209,7 +3210,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message:
               "Loan Adjusted Successfully: <a href='https://cronoscan.com/tx/" +
               tx.hash +
@@ -3326,7 +3327,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "WCRO Approval successfully...",
           },
         })
@@ -3400,7 +3401,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "WETH Approval successfully...",
           },
         })
@@ -3474,7 +3475,7 @@ export default function App() {
         setState({
           name: "txnContent",
           value: {
-            status: "ongoing",
+            status: "success",
             message: "WBTC Approval successfully...",
           },
         })
@@ -4116,7 +4117,7 @@ export default function App() {
             </Modal.Body>
           </Modal> */}
 
-          <ToastContainer
+          {/* <ToastContainer
             position="top-center"
             autoClose={5000}
             hideProgressBar={false}
@@ -4126,15 +4127,16 @@ export default function App() {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-          />
+          /> */}
           <Modal
             show={modalShow}
             onHide={() =>
               dispatch(setState({ name: "modalShow", value: false }))
             }
-            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
+            size="lg"
+            backdropClassName="modal-back"
           >
             <Modal.Body className="connect_modal dark">
               <div style={{ padding: "1.5rem" }}>
@@ -4148,8 +4150,11 @@ export default function App() {
                   <Col md="1" style={{ fontSize: "1.5rem", fontWeight: "400" }}>
                     <img
                       src={close}
+                      style={{
+                        cursor: "pointer",
+                      }}
                       onClick={() => {
-                        dispatch(setState({ name: "txnGoing", value: false }));
+                        dispatch(setState({ name: "modalShow", value: false }));
                       }}
                     ></img>
                   </Col>
@@ -4236,7 +4241,6 @@ export default function App() {
               dispatch(setState({ name: "txnGoing", value: false }))
             }
             size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
             centered
           >
             <Modal.Body className="connect_modal dark">
@@ -4252,11 +4256,14 @@ export default function App() {
                     }}
                   >
                     {txnContent.status === "ongoing" ? (
-                      <img src={spinner} className="spinner"></img>
+                      <img src={spinner}></img>
                     ) : txnContent.status === "failed" ? (
-                      <img src={failed} className="spinner"></img>
+                      <img src={failed}></img>
                     ) : (
-                      ""
+                      <img
+                        src={success}
+                        style={{ width: "8rem", height: "8rem" }}
+                      />
                     )}
                   </Col>
                 </Row>
@@ -4273,6 +4280,9 @@ export default function App() {
                 >
                   <img
                     src={close}
+                    style={{
+                      cursor: "pointer",
+                    }}
                     onClick={() => {
                       dispatch(setState({ name: "txnGoing", value: false }));
                     }}

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoLight from "../../assets/Lion-Face-WHITE.png";
-import LogoDark from "../../assets/Lion-Face.png";
 import { GoSettings } from "react-icons/go";
 import { AiOutlineClose, AiOutlineSetting } from "react-icons/ai";
 import { RiArrowDownSLine } from "react-icons/ri";
@@ -51,12 +50,7 @@ const SideBar = ({ theme }) => {
             )}
           </div>
           <div className="d-flex justify-content-center">
-            <img
-              src={theme === "dark" ? LogoLight : LogoDark}
-              width="200px"
-              className=""
-              alt=""
-            />
+            <img src={LogoLight} width="200px" className="" alt="" />
           </div>
           {/* {isConnected ? (
             <p className="text-center primary-color">{address}</p>
